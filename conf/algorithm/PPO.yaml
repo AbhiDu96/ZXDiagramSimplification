@@ -1,0 +1,43 @@
+# if toggled, cuda will be enabled by default
+cuda: True
+# if toggled, this experiment will be tracked with Weights and Biases
+track: False
+# the wandb's project name
+wandb_project_name: "cleanRL"
+ # the entity (team) of wandb's project
+wandb_entity: None
+# whether to capture videos of the agent performances (check out `videos` folder)
+capture_video: False
+
+# Algorithm specific arguments
+# total timesteps of the experiments
+total_timesteps: 500000
+# the learning rate of the optimizer
+learning_rate: 3.0e-4
+# the number of steps to run in each environment per policy rollout
+num_steps: 128
+# Toggle learning rate annealing for policy and value networks
+anneal_lr: True
+# the discount factor gamma
+gamma: 0.99
+# the lambda for the general advantage estimation
+gae_lambda: 0.95
+# the number of mini-batches
+num_minibatches: 4
+# the K epochs to update the policy
+update_epochs: 4
+# Toggles advantages normalization
+norm_adv: True
+# the surrogate clipping coefficient
+clip_coef: 0.1
+# Toggles whether or not to use a clipped loss for the value function, as per the paper.
+clip_vloss: True
+# coefficient of the entropy
+ent_coef: 0.01
+# coefficient of the value function
+vf_coef: 0.5
+# the maximum norm for the gradient clipping
+max_grad_norm: 0.1
+# the target KL divergence threshold
+target_kl: null
+

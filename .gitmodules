@@ -1,0 +1,3 @@
+[submodule "pyzx_korbinian"]
+	path = pyzx_korbinian
+	url = git@gitlab.cc-asp.fraunhofer.de:qaci/pyzx_korbinian.git

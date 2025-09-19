@@ -1,0 +1,16 @@
+.ipynb_checkpoints/*
+__pycache__/*
+outputs/*
+runs/*
+validation_results/*
+bench_results/*
+*.png
+error.log
+.vscode
+*.csv
+runs_pretraining/*
+dataset_similarity/*
+original/*
+optimized/*
+data_processing/*
+ResultsZXGraph*

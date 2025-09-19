@@ -1,0 +1,10 @@
+model_path: ???
+n_qubit: 5
+n_gate: 80
+p_two_qubit: 0.25
+p_H: 0.25
+p_z: 0.25
+p_x: 0.25
+many_pi_gates: False
+clifford_plus_T: True
+search_loops: 1

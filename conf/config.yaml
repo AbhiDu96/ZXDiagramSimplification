@@ -1,0 +1,20 @@
+defaults:
+ - validation: default
+# seed of the experiment
+seed: 1
+device: "cuda"
+# if toggled, `torch.backends.cudnn.deterministic=False`
+torch_deterministic: True
+# the name of this experiment
+exp_name: ???
+# to be filled in runtime
+# the batch size (computed in runtime)
+batch_size: 0
+# the mini-batch size (computed in runtime)
+minibatch_size: 0
+# the number of iterations (computed in runtime)
+num_iterations: 0
+n_validation: 100
+max_tree_size: 128
+multi_range: 1
+

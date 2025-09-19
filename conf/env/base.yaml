@@ -1,0 +1,24 @@
+# the number of parallel game environments
+num_envs: 8
+# mutation probability
+mutate_prob: 0.5
+# mutation steps
+mutation_steps: 100
+# reward function to use
+reward_fn: "absolute_cnot_count_reward"
+# only give rewards in the final timestep
+sparsify_reward: True
+# use a directed graph as a basis
+make_directed: True
+# n_qubits
+n_qubits: 5
+depth: 250
+cnot_fraction: 0.1
+t_fraction: 0.5
+h_fraction: 0.3
+max_env_steps: 1_000_000
+extra_noise_mean: 0.0
+extra_noise_std: 0.0
+rules_used: ["bialgebra","spider_fusion", "pi_copy", "euler"]
+full_fuse_every_step: False
+reduce_at_reset: False

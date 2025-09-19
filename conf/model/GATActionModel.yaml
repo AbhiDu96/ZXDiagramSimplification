@@ -1,0 +1,6 @@
+# dimension for each action
+action_dim: 16
+hidden_dim: 256
+n_heads: 4
+n_message_passing: 8
+model_type: "GAT"
