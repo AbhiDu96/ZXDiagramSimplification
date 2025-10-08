@@ -17,3 +17,8 @@ We use ray for parallelization, so you would need to set up a ray cluster for la
 We also have test scripts to compare compilers in bench_compilers.py Notice that this relies on Staudacher et al's pyzx optimizer for benchmarking which we do not distribute here.
 You can either include that code or comment out the relevant lines in bench_compilers.py
 You will also need the the pyzx environment found at https://github.com/MattAlexMiracle/pyzx_environment/tree/main to run the optimization.
+
+For quick testing, you can look at `bqskit_pass.py` and `bench_compilers.py` which allow you to benchmark a pretrained model on random circuits.
+`bench_compilers.py` contains a CLI that allows you to evaluate and save the results of circuits with a specified ratio of gates.
+Note: You will still need the RL environment and ray installed.
+`bqskit_pass.py` contains a wrapper that allows you to integrate our optimizer into bqskit pipelines (see also `bench_compilers.py`).
