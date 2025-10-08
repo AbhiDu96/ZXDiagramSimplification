@@ -34,8 +34,10 @@ import numpy as np
 from zx_env.general_utils.utils import check_equality
 from zx_env import extract_circuit
 import importlib
-korbinianbench = importlib.import_module("pyzx_korbinian.pyzx-heuristics.korbinianbench")
-
+try:
+    korbinianbench = importlib.import_module("pyzx_korbinian.pyzx-heuristics.korbinianbench")
+except:
+    pass
 import pickle
 
 #bqskit.enable_logging(True)

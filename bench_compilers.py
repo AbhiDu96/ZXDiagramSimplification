@@ -20,7 +20,6 @@ from bqskit_pass import (
     cnot_count_scorer,
     OutputGraphImage,
     FullReduceZX,
-    KorbinianMethodZX,
 )
 import logging
 import pickle
@@ -42,9 +41,12 @@ import ray
 import random
 import importlib
 
-korbinianbench = importlib.import_module(
-    "pyzx_korbinian.pyzx-heuristics.korbinianbench"
-)
+try:
+    korbinianbench = importlib.import_module("pyzx_korbinian.pyzx-heuristics.korbinianbench")
+    from bqskit_pass import KorbinianMethodZX
+except:
+    pass
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
@@ -289,11 +291,11 @@ def bench(seed, args, n_qubits=50, n_depth=2000):
     )
     # run through all compiler passes
     comps = {
-        "qiskit_ai_compile": qiskit_compile,
-        "korbinian": korbinian_opt,
+        #"qiskit_ai_compile": qiskit_compile,
+        #"korbinian": korbinian_opt,
         "ours": our_opt,
-        "full reduce": full_reduce,
-        "transpile": just_transpile,
+        #"full reduce": full_reduce,
+        #"transpile": just_transpile,
     }
 
     results_random = dict()
