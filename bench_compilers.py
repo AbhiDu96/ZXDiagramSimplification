@@ -25,7 +25,7 @@ import logging
 import pickle
 import numpy as np
 import torch
-from model import BundleNet
+from models import BundleNet
 from bqskit.ir.lang.qasm2 import OPENQASM2Language
 import os
 from bqskit.ext import bqskit_to_qiskit

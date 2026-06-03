@@ -47,7 +47,7 @@ def save_dataset(cfg,iters=100_000):
 
 
 def gather_data(start_obs, cfg,depth=128):
-    # print("sample new circuit")
+
     environment = zx_env(
         mutate_probability=cfg.env.mutate_prob,
         mutation_steps=cfg.env.mutation_steps,
@@ -65,7 +65,7 @@ def gather_data(start_obs, cfg,depth=128):
         reduce_at_reset=cfg.env.reduce_at_reset,
     )
     obses = []
-    obs, _ = environment.reset(initital_circuit_graph=start_obs)
+    obs, _ = environment.reset(initial_circuit_graph=start_obs)
     [obs, action_masks, zxgraph, _, _, _] = obs
     action_masks = action_masks[:, 1:]
     obses.append(obs)

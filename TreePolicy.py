@@ -1,3 +1,4 @@
+import logging
 import torch
 import torch_geometric
 from torch import nn
@@ -251,9 +252,9 @@ def extract_optimal_path(t:Tree):
     return (transform_steps[::-1],t)
 
 def show_rules(transformed_steps):
-    print([k[1]["applied_rule"] for k in transformed_steps])
+    logging.info("applied rules: %s", [k[1]["applied_rule"] for k in transformed_steps])
 
-def start_tree(cfg,obs,zx,info) -> Tree:
+def start_tree(obs, zx, info, multi_range=1) -> Tree:
     t=Tree()
     t.nodes = [obs]
     t.zx_states=[zx]
@@ -263,6 +264,5 @@ def start_tree(cfg,obs,zx,info) -> Tree:
     t.rewards=[r0]
     t.best_reward=r0
     t.infos.append(info)
-    t.multi_range=cfg.multi_range
-    print("multirange",t.multi_range)
+    t.multi_range=multi_range
     return t

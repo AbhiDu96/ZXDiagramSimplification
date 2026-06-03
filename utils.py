@@ -160,12 +160,12 @@ class SingleVecEnv(gym.Env):
         return next_obs, reward, terminations, truncations, infos
 
     def reset(
-        self,initital_circuit_graph=None
+        self,initial_circuit_graph=None
     ):
-        if initital_circuit_graph is None:
+        if initial_circuit_graph is None:
             return zip(*map(lambda x: x.reset(), self.envs))
         else:
-            return zip(*map(lambda x: x[0].reset(initital_circuit_graph=x[1]), zip(self.envs,initital_circuit_graph)))
+            return zip(*map(lambda x: x[0].reset(initial_circuit_graph=x[1]), zip(self.envs,initial_circuit_graph)))
     def __getitem__(self,idx):
         return self.envs[idx]
 

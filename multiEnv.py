@@ -1,3 +1,4 @@
+import logging
 import torch
 from torch_geometric.data import Data
 import networkx as nx
@@ -30,8 +31,8 @@ class EnvActor:
             self.rewards = 0
             o,_ = self.env.reset()
         return o, r, t1, t2, i, n_steps, rewards
-    def reset(self,*args, **kwargs):
-        print("ALL RESETTING\n\n")
+    def reset(self, *args, **kwargs):
+        logging.debug("ALL RESETTING")
         return self.env.reset(*args, **kwargs)
     def get_env(self,):
         return self.env
@@ -59,10 +60,8 @@ class ParallelVecEnv(gym.Env):
         
         return next_obs, reward, terminations, truncations, infos
 
-    def reset(
-        self,
-    ):
-        print("ALL RESETTING\n\n")
+    def reset(self):
+        logging.debug("ALL RESETTING")
         return zip(*ray.get([e.reset.remote() for e in self.pool]))
 
     

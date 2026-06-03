@@ -2,6 +2,7 @@
 import os
 import random
 import time
+import logging
 from dataclasses import dataclass
 import gymnasium as gym
 import numpy as np
@@ -10,7 +11,7 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.distributions.categorical import Categorical
 from torch.utils.tensorboard import SummaryWriter
-from model import ActionModel
+from models import ActionModel
 from torch_geometric.data import Batch
 from zx_env import zx_env
 import hydra
@@ -18,6 +19,8 @@ from omegaconf import DictConfig, OmegaConf, read_write
 import utils
 from tqdm import trange
 from multiEnv import ParallelVecEnv
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
 @dataclass
 class Args:
@@ -108,8 +111,8 @@ def make_env(cfg, device):
     return env
 
 def validate(cfg,global_step,writer,val_env,zx_graph, agent):
-    print("STARTING VALIDATION")
-    next_obs,_ = val_env.reset(initital_circuit_graph=zx_graph)
+    logging.info("STARTING VALIDATION")
+    next_obs,_ = val_env.reset(initial_circuit_graph=zx_graph)
     returns = torch.zeros(cfg.env.num_envs)
     for step in range(0, cfg.env.max_env_steps):
         # ALGO LOGIC: action logic
@@ -146,7 +149,7 @@ def step_envs(envs: [gym.Env], actions: [(int, int)]):
 
     for e, a in zip(envs, actions):
         pos,ac = a.astype(np.int32)
-        print("position",pos,"action",ac)
+        logging.debug("position %s action %s", pos, ac)
         o, r, t1, t2, i = e.step(ac,position=pos)
         next_obs.append(o)
         reward.append(r)
@@ -159,7 +162,7 @@ def step_envs(envs: [gym.Env], actions: [(int, int)]):
 
 @hydra.main(version_base=None, config_path="conf", config_name="config.yaml")
 def main(cfg: DictConfig):
-    print(cfg)
+    logging.info("config: %s", OmegaConf.to_yaml(cfg))
     #torch.autograd.set_detect_anomaly(True)
     with read_write(cfg):
         cfg.batch_size = int(cfg.env.num_envs * cfg.algorithm.num_steps)
@@ -248,14 +251,12 @@ def main(cfg: DictConfig):
                 next_obs,
                 torch.Tensor(next_done),
             )
-            print("reward",torch.tensor(reward).float().mean())
+            logging.debug("reward: %.4f", torch.tensor(reward).float().mean())
 
             if "final_info" in infos:
                 for info in infos["final_info"]:
                     if info and "episode" in info:
-                        print(
-                            f"global_step={global_step}, episodic_return={info['episode']['r']}"
-                        )
+                        logging.info("global_step=%d, episodic_return=%.4f", global_step, info["episode"]["r"])
                         writer.add_scalar(
                             "charts/episodic_return", info["episode"]["r"], global_step
                         )
@@ -367,7 +368,7 @@ def main(cfg: DictConfig):
                     agent.parameters(), cfg.algorithm.max_grad_norm
                 )
                 optimizer.step()
-                print("forward",t1-t0,"backward+update",time.time()-t1)
+                logging.debug("forward=%.3fs backward+update=%.3fs", t1 - t0, time.time() - t1)
 
             if (
                 cfg.algorithm.target_kl is not None
@@ -390,10 +391,9 @@ def main(cfg: DictConfig):
         writer.add_scalar("losses/approx_kl", approx_kl.item(), global_step)
         writer.add_scalar("losses/clipfrac", np.mean(clipfracs), global_step)
         writer.add_scalar("losses/explained_variance", explained_var, global_step)
-        print("SPS:", int(global_step / (time.time() - start_time)))
-        writer.add_scalar(
-            "charts/SPS", int(global_step / (time.time() - start_time)), global_step
-        )
+        sps = int(global_step / (time.time() - start_time))
+        logging.info("SPS: %d", sps)
+        writer.add_scalar("charts/SPS", sps, global_step)
         if iteration % 10 == 1:
             validate(cfg,global_step,writer,validation_envs,validation_circuits,agent)
 

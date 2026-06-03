@@ -10,7 +10,7 @@ from torch.utils.data import Dataset, DataLoader
 import matplotlib.pyplot as plt
 import hydra
 from omegaconf import DictConfig, OmegaConf, read_write
-from model import BundleNet
+from models import BundleNet
 import os
 
 class DummyExtractor(torch.nn.Module):
@@ -48,7 +48,7 @@ def deploy_agents(cfg, state, agent):
     next_obs = None
     for it in range(cfg.validation.search_loops):
         print("LOOP ROUND", it)
-        next_obs, info = env.reset(initital_circuit_graph=start)
+        next_obs, info = env.reset(initial_circuit_graph=start)
         next_obs = start_tree(next_obs.Graph, next_obs.state_zx_graph, info=info)
         for step in range(0, cfg.algorithm.num_steps):
             # ALGO LOGIC: action logic

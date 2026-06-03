@@ -39,10 +39,8 @@ def save_dataset(cfg,iters=100_000):
     pool=torch.multiprocessing.Pool(8,initializer=init_pool_processes)
     results = pool.imap_unordered(dummy, [cfg for _ in range(iters)])
     for i,obs in tqdm(enumerate(results)):
-        #t0=time.time()
         with open(f"dataset_similarity/item_{i}.pkl","wb+") as writer:
             pickle.dump(obs, writer)
-        #print("time pickle",time.time()-t0)
 
 
 def gather_data(start_obs, cfg,depth=16):
@@ -65,7 +63,7 @@ def gather_data(start_obs, cfg,depth=16):
     )
     obses = []
     graphs = []
-    obs, _ = environment.reset(initital_circuit_graph=start_obs)
+    obs, _ = environment.reset(initial_circuit_graph=start_obs)
     [obs, action_masks, zxgraph, _, _, _] = obs
     graphs.append(zxgraph)
     action_masks = action_masks[:, 1:]

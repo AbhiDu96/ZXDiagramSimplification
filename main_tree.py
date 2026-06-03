@@ -1,3 +1,4 @@
+import logging
 import hydra
 from omegaconf import DictConfig, OmegaConf, read_write
 import utils
@@ -14,11 +15,13 @@ from ppo import make_env
 from torch import optim
 import time
 from tqdm import trange
-from model import BundleNet
+from models import BundleNet
 import pickle
 import os
 import ray
 from zx_env import extract_circuit
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
 
 def restart_tree(cfg, tree : Tree):
@@ -26,7 +29,7 @@ def restart_tree(cfg, tree : Tree):
     best_node = tree.nodes[idx]
     best_zx = tree.zx_states[idx]
     best_info = tree.infos[idx]
-    return start_tree(cfg, best_node,best_zx,best_info)
+    return start_tree(best_node, best_zx, best_info, multi_range=cfg.multi_range)
 
 @ray.remote
 def deploy_train(cfg, agent):
@@ -40,11 +43,11 @@ def deploy_train(cfg, agent):
     dones = torch.zeros((cfg.algorithm.num_steps,))
     values = torch.zeros((cfg.algorithm.num_steps,))
     next_obs, infos = env.reset()
-    next_obs = start_tree(cfg,next_obs.Graph, next_obs.state_zx_graph, info=infos)
+    next_obs = start_tree(next_obs.Graph, next_obs.state_zx_graph, info=infos, multi_range=cfg.multi_range)
     actions = torch.zeros((cfg.algorithm.num_steps, 1+cfg.multi_range))
     next_done = 0
     for step in range(0, cfg.algorithm.num_steps):
-        print(next_done)
+        logging.info("done flag: %s", next_done)
         obs[step] = next_obs
         dones[step] = next_done
 
@@ -74,7 +77,7 @@ def deploy_train(cfg, agent):
 @ray.remote
 def deploy_agents(cfg, state, agent):
     env = make_env(cfg, "cpu")
-    next_obs, info = env.reset(initital_circuit_graph=state)
+    next_obs, info = env.reset(initial_circuit_graph=state)
     next_obs = start_tree(cfg,next_obs.Graph, next_obs.state_zx_graph, info=info)
     rewards = 0
     for step in range(0, cfg.algorithm.num_steps):
@@ -97,8 +100,7 @@ def deploy_agents(cfg, state, agent):
 
 
 def validation(run_name, global_step, cfg, writer, validations, agent):
-    print("STARTING VALIDATION")
-    # next_obs, _ = zip(*[e.reset(initital_circuit_graph=v) for e,v in zip(envs,validations)])
+    logging.info("STARTING VALIDATION")
     res = []
     for v in validations:
         res.append(deploy_agents.remote(cfg, v, agent))
@@ -113,7 +115,7 @@ def validation(run_name, global_step, cfg, writer, validations, agent):
     writer.add_scalar("charts/validation_mean_CNOT", np.mean(tq), global_step)
     writer.add_scalar("charts/validation_max_CNOT", np.max(tq), global_step)
     writer.add_scalar("charts/validation_min_CNOT", np.min(tq), global_step)
-    print([circuit.get_best_info() for circuit in next_obs])
+    logging.info("validation infos: %s", [circuit.get_best_info() for circuit in next_obs])
     level = [circuit.get_best_info()["level"] for circuit in next_obs]
     writer.add_scalar("charts/expected_level", np.mean(level), global_step)
     optimal_paths = [extract_optimal_path(t) for t in next_obs]
@@ -124,10 +126,7 @@ def validation(run_name, global_step, cfg, writer, validations, agent):
     with open(f"runs/{run_name}/saves/data-{global_step}.pkl", "wb+") as writer:
         pickle.dump(optimal_paths, writer)
     torch.save(agent.state_dict(), f"runs/{run_name}/saves/model-{global_step}.pth")
-    #prune_old_models(run_name, 3)
-    print(
-        "VALIDATION DONE",
-    )
+    logging.info("VALIDATION DONE")
     # return best_node
 
 
@@ -141,7 +140,7 @@ def prune_old_models(run_name, keep):
 
 @hydra.main(version_base=None, config_path="conf", config_name="config.yaml")
 def main(cfg: DictConfig):
-    print(cfg)
+    logging.info("config: %s", OmegaConf.to_yaml(cfg))
     # torch.autograd.set_detect_anomaly(True)
     with read_write(cfg):
         cfg.batch_size = int(cfg.env.num_envs * cfg.algorithm.num_steps)
@@ -180,7 +179,7 @@ def main(cfg: DictConfig):
     for _ in range(cfg.n_validation):
         e = make_env(cfg, device)
         e.reset()
-        validation_circuits.append(e.state_zx_graph_initital)
+        validation_circuits.append(e.state_zx_graph_initial)
     # validation_circuits = [e.state_zx_graph for e in validation_envs]
 
     agent = BundleNet(
@@ -307,7 +306,7 @@ def main(cfg: DictConfig):
         # Optimizing the policy and value network
         b_inds = np.arange(cfg.batch_size)
         clipfracs = []
-        print("Running iteration", iteration)
+        logging.info("Running iteration %d", iteration)
         for epoch in trange(cfg.algorithm.update_epochs):
             np.random.shuffle(b_inds)
             for start in range(0, cfg.batch_size, cfg.minibatch_size):
@@ -321,7 +320,7 @@ def main(cfg: DictConfig):
                 )
                 t1 = time.time()
                 # _, newlogprob, entropy, newvalue = zip(*[b.select(agent,a) for b,a in zip(b_obs[mb_inds],b_actions.long()[mb_inds])])
-                print("length", len(cache))
+                logging.debug("cache length: %d", len(cache))
                 """_, newlogprob, entropy, newvalue = zip(
                     *[
                         b.select(agent, a, device=device, cache=c)
@@ -377,7 +376,7 @@ def main(cfg: DictConfig):
                     v_loss = 0.5 * ((newvalue - b_returns[mb_inds]) ** 2).mean()
 
                 entropy_loss = entropy.mean()
-                print("losses", pg_loss, entropy_loss, v_loss, "ratio", ratio)
+                logging.debug("losses pg=%.4f ent=%.4f v=%.4f ratio=%.4f", pg_loss, entropy_loss, v_loss, ratio.mean())
                 loss = (
                     pg_loss
                     - cfg.algorithm.ent_coef * entropy_loss
@@ -390,14 +389,7 @@ def main(cfg: DictConfig):
                 )
                 optimizer.step()
                 t4 = time.time()
-                print(
-                    "running forward",
-                    t1 - t0,
-                    "selection",
-                    t3 - t1,
-                    "optimizing",
-                    t4 - t3,
-                )
+                logging.debug("forward=%.3fs selection=%.3fs optimizing=%.3fs", t1 - t0, t3 - t1, t4 - t3)
 
             if (
                 cfg.algorithm.target_kl is not None
@@ -419,10 +411,9 @@ def main(cfg: DictConfig):
         writer.add_scalar("losses/clipfrac", np.mean(clipfracs), global_step)
         writer.add_scalar("losses/explained_variance", explained_var, global_step)
 
-        print("SPS:", int(global_step / (time.time() - start_time)))
-        writer.add_scalar(
-            "charts/SPS", int(global_step / (time.time() - start_time)), global_step
-        )
+        sps = int(global_step / (time.time() - start_time))
+        logging.info("SPS: %d", sps)
+        writer.add_scalar("charts/SPS", sps, global_step)
 
     [e.close() for e in envs]
     writer.close()

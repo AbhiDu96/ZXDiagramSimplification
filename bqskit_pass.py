@@ -24,21 +24,23 @@ from zx_env import random_circuit
 from zx_env import zx_env
 import matplotlib.pyplot as plt
 from copy import deepcopy
-from model import BundleNet
+from models import BundleNet
 import os
 from brute_force_CX_opt import optimize_CX_circuit
 from pyzx.simplify import to_graph_like
 import utils
-from TreePolicy import Tree
+from TreePolicy import Tree, start_tree
 import numpy as np
 from zx_env.general_utils.utils import check_equality
 from zx_env import extract_circuit
 import importlib
 try:
     korbinianbench = importlib.import_module("pyzx_korbinian.pyzx-heuristics.korbinianbench")
-except:
+except Exception:
     pass
 import pickle
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
 #bqskit.enable_logging(True)
 
@@ -82,52 +84,32 @@ def make_env(device):
     env = utils.GraphMaskWrapper(env,device)
     return env
 
-def start_tree(obs,zx,info):
-    t=Tree()
-    t.nodes = [obs]
-    t.zx_states=[zx]
-    t.depths=[0]
-    t.children=[[]]
-    r0=info["reward"]
-    t.rewards=[r0]
-    t.best_reward=r0
-    t.infos.append(info)
-    t.multi_range=16
-    return t
-
-def optimizing(state,searchdepth):
-    model = torch.load("runs/QACI_graph_optim__20MIO_32_envs_changed_rules_optimized_5qubit_multirange_4_depth_16__1__1726148732/saves/model-819200.pth")
-    agent=BundleNet(16,
-            5,
-            256,
-            4,
-            8,
-            "cpu",
-            "GAT",
-    )
-    agent.load_state_dict(model)
-    logging.info(f"model keys {model.keys()}")
+def optimizing(state, searchdepth, model_path=None):
+    if model_path is None:
+        model_path = os.environ.get(
+            "ZX_MODEL_PATH",
+            "runs/QACI_graph_optim__20MIO_32_envs_changed_rules_optimized_5qubit_multirange_4_depth_16__1__1726148732/saves/model-819200.pth",
+        )
+    logging.info("loading model from %s", model_path)
+    state_dict = torch.load(model_path)
+    agent = BundleNet(16, 5, 256, 4, 8, "cpu", "GAT")
+    agent.load_state_dict(state_dict)
     env = make_env("cpu")
     start = state.copy().to_graph()
-    #print(check_equality(zx.Circuit.from_graph(start.copy().to_graph()).to_graph(), start))
     next_obs = None
     for it in range(1):
-        next_obs, info = env.reset(initital_circuit_graph=start)
-        next_obs = start_tree(next_obs.Graph, next_obs.state_zx_graph, info=info)
-        #print("check",check_equality(start, next_obs.get_best_node()))
-        max_rew=0
+        next_obs, info = env.reset(initial_circuit_graph=start)
+        next_obs = start_tree(next_obs.Graph, next_obs.state_zx_graph, info=info, multi_range=16)
+        max_rew = 0
         for step in range(searchdepth):
-            # ALGO LOGIC: action logic
             with torch.no_grad():
-                # make a temporary batch from our data:
                 effect, total_log, _, value = next_obs.select(agent)
 
-            # TRY NOT TO MODIFY: execute the game and log data.
             new_tree, rew, term, trunc, info = next_obs.expand(effect, env)
             if term or trunc:
-                print("exiting due to termination signal")
+                logging.info("exiting due to termination signal")
                 return next_obs.get_best_node()
-            max_rew=max(rew,max_rew)
+            max_rew = max(rew, max_rew)
             next_done = np.logical_or(term, trunc)
             next_obs, next_done = (
                 new_tree,
