@@ -384,7 +384,7 @@ class MCTS_like:
 
 
 if __name__ == "__main__":
-    from zx_env import zx_env
+    from zx_env import ZXEnv
     from ppo import make_env
 
     torch.manual_seed(42)

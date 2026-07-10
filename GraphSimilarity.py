@@ -9,7 +9,7 @@ import hydra
 from torch.utils.data import Dataset, DataLoader
 from omegaconf import DictConfig, OmegaConf, read_write
 import numpy as np
-from zx_env import zx_env
+from zx_env import ZXEnv
 from pytorch_metric_learning import miners, losses, distances, regularizers
 from collections import deque
 from torch.utils.tensorboard import SummaryWriter
@@ -45,7 +45,7 @@ def save_dataset(cfg,iters=100_000):
 
 def gather_data(start_obs, cfg,depth=16):
     # print("sample new circuit")
-    environment = zx_env(
+    environment = ZXEnv(
         mutate_probability=cfg.env.mutate_prob,
         mutation_steps=cfg.env.mutation_steps,
         reward_fn=cfg.env.reward_fn,

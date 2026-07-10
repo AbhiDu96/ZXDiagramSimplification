@@ -21,7 +21,7 @@ import qiskit
 
 from zx_env import extract_circuit
 from zx_env import random_circuit
-from zx_env import zx_env
+from zx_env import ZXEnv
 import matplotlib.pyplot as plt
 from copy import deepcopy
 from models import BundleNet
@@ -64,7 +64,7 @@ def make_env(device):
     h_ratio= 0.2
     t_ratio = 0.2
     p_x = 1-(mq_ratio+h_ratio+(t_ratio/2))
-    env = zx_env(
+    env = ZXEnv(
         mutate_probability = 0,
         mutation_steps = 0,
         reward_fn = "normalized_cnot_count_reward",

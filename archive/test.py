@@ -1,4 +1,4 @@
-from zx_env import zx_env
+from zx_env import ZXEnv
 from ppo import make_env
 import torch
 import numpy as np

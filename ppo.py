@@ -13,7 +13,7 @@ from torch.distributions.categorical import Categorical
 from torch.utils.tensorboard import SummaryWriter
 from models import ActionModel
 from torch_geometric.data import Batch
-from zx_env import zx_env
+from zx_env import ZXEnv
 import hydra
 from omegaconf import DictConfig, OmegaConf, read_write
 import utils
@@ -87,7 +87,7 @@ class Args:
 
 
 def make_env(cfg, device):
-    env = zx_env(
+    env = ZXEnv(
         mutate_probability = cfg.env.mutate_prob,
         mutation_steps = cfg.env.mutation_steps,
         reward_fn = cfg.env.reward_fn,
