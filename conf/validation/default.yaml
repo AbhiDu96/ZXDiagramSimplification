@@ -1,4 +1,9 @@
 model_path: ???
+# dataset: random/generated circuits (benchmark_utils.Dataset)
+# benchmark: named benchmark circuits (get_benchmark_circuits)
+mode: dataset
+# number of random circuits to evaluate in dataset mode
+n_circuits: 1000
 n_qubit: 5
 n_gate: 80
 p_two_qubit: 0.25

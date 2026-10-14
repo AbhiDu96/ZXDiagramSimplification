@@ -254,7 +254,7 @@ Checkpoints saved as:
 
 ## 9. Inference / Benchmarking
 
-The trained model plugs into BQSKit compiler pipelines via `bqskit_pass.py`. BQSKit partitions a circuit into subcircuits, and the RL agent acts as a **peephole optimizer** — it optimizes each subcircuit independently via the tree search, then the results are reassembled.
+The trained model plugs into BQSKit compiler pipelines via `zx_compiler.py`. BQSKit partitions a circuit into subcircuits, and the RL agent acts as a **peephole optimizer** — it optimizes each subcircuit independently via the tree search, then the results are reassembled.
 
 `bench_compilers.py` provides CLI benchmarking against other compilers (PyZX, Qiskit, etc.).
 

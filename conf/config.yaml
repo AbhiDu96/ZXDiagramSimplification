@@ -1,5 +1,9 @@
 defaults:
+ - env: base
  - validation: default
+ - model: GATActionModel
+ - algorithm: PPO_search
+ - _self_
 # seed of the experiment
 seed: 1
 device: "cuda"
@@ -17,4 +21,4 @@ num_iterations: 0
 n_validation: 100
 max_tree_size: 128
 multi_range: 1
-
+epochs: 40

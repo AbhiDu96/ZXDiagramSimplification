@@ -20,7 +20,7 @@ from TreePolicy import start_tree
 
 def generate_N_colors(N):
     import matplotlib.pyplot as plt
-    colormap = plt.cm.get_cmap("tab10", N)
+    colormap = plt.colormaps["tab10"].resampled(N)
     colors = [colormap(i) for i in range(N)]
     return colors
 

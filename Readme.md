@@ -7,7 +7,7 @@ Code for the paper:
 This repository implements the Appendix C setting (compact 8-feature representation), including:
 - Tree-search training with PPO (`main_tree.py`)
 - Flat PPO baseline (`ppo.py`)
-- BQSKit integration (`bqskit_pass.py`)
+- BQSKit integration (`zx_compiler.py`)
 - Compiler benchmarking (`bench_compilers.py`)
 
 ## 1. How the pipeline works
@@ -151,13 +151,13 @@ Notes:
 
 ### 6.2 Use a trained model in BQSKit flows
 
-`bqskit_pass.py` loads a model path from `ZX_MODEL_PATH` (or falls back to a default path).
+`zx_compiler.py` loads a model path from `ZX_MODEL_PATH` (or falls back to a default path).
 
 ```bash
 export ZX_MODEL_PATH="runs/<run_name>/saves/model-<step>.pth"
 ```
 
-Then run your BQSKit-based workflow (for examples, see `bench_compilers.py` and `bqskit_pass.py`).
+Then run your BQSKit-based workflow (for examples, see `bench_compilers.py` and `zx_compiler.py`).
 
 ## 7. Useful files
 

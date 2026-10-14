@@ -7,81 +7,17 @@ import torch_geometric
 from torch_geometric import nn as gnn
 import hydra
 from torch.utils.data import Dataset, DataLoader
-from omegaconf import DictConfig, OmegaConf, read_write
+from omegaconf import DictConfig, OmegaConf
 import numpy as np
-from zx_env import ZXEnv
-from pytorch_metric_learning import miners, losses, distances, regularizers
-from collections import deque
+from pytorch_metric_learning import losses
 from torch.utils.tensorboard import SummaryWriter
 import time
-import ray
 import torch.multiprocessing
-from tqdm import trange, tqdm
 import os
 
 torch.multiprocessing.set_sharing_strategy("file_system")
-import contextlib
 from torch_scatter import scatter
-from zx_env import extract_circuit
 import pickle
-
-
-def init_pool_processes():
-    np.random.seed()
-    torch.random.seed()
-def dummy(cfg):
-    with contextlib.redirect_stdout(None):
-        o=gather_data(None,cfg,16)[0]
-    return o
-
-@hydra.main(version_base=None, config_path="conf", config_name="config.yaml")
-def save_dataset(cfg,iters=100_000):
-    pool=torch.multiprocessing.Pool(8,initializer=init_pool_processes)
-    results = pool.imap_unordered(dummy, [cfg for _ in range(iters)])
-    for i,obs in tqdm(enumerate(results)):
-        with open(f"dataset_similarity/item_{i}.pkl","wb+") as writer:
-            pickle.dump(obs, writer)
-
-
-def gather_data(start_obs, cfg,depth=16):
-    # print("sample new circuit")
-    environment = ZXEnv(
-        mutate_probability=cfg.env.mutate_prob,
-        mutation_steps=cfg.env.mutation_steps,
-        reward_fn=cfg.env.reward_fn,
-        n_qubits=cfg.env.n_qubits,
-        depth=cfg.env.depth,
-        mq_ratio=cfg.env.cnot_fraction,
-        t_ratio=cfg.env.t_fraction,
-        h_ratio=cfg.env.h_fraction,
-        max_steps=cfg.env.max_env_steps,
-        negative_reward_mean=cfg.env.extra_noise_mean,
-        negative_reward_std=cfg.env.extra_noise_std,
-        rules_list=cfg.env.rules_used,
-        full_fuse_every_step=cfg.env.full_fuse_every_step,
-        reduce_at_reset=cfg.env.reduce_at_reset,
-    )
-    obses = []
-    graphs = []
-    obs, _ = environment.reset(initial_circuit_graph=start_obs)
-    [obs, action_masks, zxgraph, _, _, _] = obs
-    graphs.append(zxgraph)
-    action_masks = action_masks[:, 1:]
-    obses.append(obs)
-    for _ in range(depth):
-        choices = (
-            (torch.arange(len(action_masks.reshape(-1)))[action_masks.reshape(-1) == 1])
-            .long()
-            .reshape(-1)
-        )
-        choice = torch.tensor(np.random.choice(choices.numpy())).long()
-        act, pos = torch.unravel_index(choice, action_masks.shape)
-        obs, _, _, _, _ = environment.step(position=pos.item(), action=act.item())
-        [obs, action_masks, zxgraph, _, _, _] = obs
-        action_masks = action_masks[:, 1:]
-        obses.append(obs)
-        graphs.append(zxgraph)
-    return obses, graphs
 
 
 class ZXGraphDataset(Dataset):
@@ -93,14 +29,14 @@ class ZXGraphDataset(Dataset):
         # self.new_obs = gather_data.remote(self.cfg)
 
     def __getitem__(self, index):
-        with open(f"dataset_similarity/item_{index}.pkl","rb") as reader:
+        with open(f"dataset/item_{index}.pkl","rb") as reader:
             obses = pickle.load(reader)
         idxs = np.random.choice(len(obses), size=(self.picks,), replace=False)
         return [obses[i] for i in idxs]
 
     def __len__(self):
         # 32 choose 2
-        return len(os.listdir("dataset_similarity/"))
+        return len(os.listdir("dataset/"))
 
 
 def worker_init_fun(worker_id):
@@ -195,7 +131,7 @@ class GlobalAggregator(nn.Module):
 
 
 def load(path):
-    net = torch.load(path, map_location="cpu")
+    net = torch.load(path, map_location="mps")
     return net
 
 
@@ -205,24 +141,16 @@ def main(cfg: DictConfig):
     writer = SummaryWriter(folder)
     writer.add_text(
         "hyperparameters",
-        "|param|value|\n|-|-|\n%s"
-        % (
-            "\n".join(
-                [
-                    f"|{key}|{value}|"
-                    for key, value in OmegaConf.to_container(cfg, resolve=True).items()
-                ]
-            )
-        ),
+        "|param|value|\n|-|-|\n{}".format("\n".join([f"|{key}|{value}|" for key, value in OmegaConf.to_container(cfg, resolve=True).items()])),
     )
     device = torch.device(
-        "cuda" if torch.cuda.is_available() and cfg.device == "cuda" else "cpu"
+        "cuda" if torch.cuda.is_available() and cfg.device == "cuda" else "mps" if torch.backends.mps.is_available() and cfg.device == "mps" else "cpu"
     )
     model = GlobalAggregator(2, 1, 64, 256, n_layers=6).to(device)
     #model = load("runs_pretraining/1722929332_test/229000_model.pth")
     loss_fn = losses.VICRegLoss()
     opt = torch.optim.AdamW(model.parameters(), 3e-3)
-    sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt,40_000)
+    sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=cfg.epochs)
     dataloader = DataLoader(
         ZXGraphDataset(cfg),
         batch_size=256,
@@ -233,7 +161,7 @@ def main(cfg: DictConfig):
         worker_init_fn=worker_init_fun,
     )
     global_step = 0
-    for epoch in range(40_000):
+    for epoch in range(cfg.epochs):
         print("epoch", epoch)
         for stp, obs in enumerate(dataloader):
             global_step += 1
@@ -263,9 +191,7 @@ def main(cfg: DictConfig):
         if global_step > 5_000_000:
             break
         sched.step()
-        writer.add_scalar(
-                "losses/lr_schedular", np.mean(sched.get_last_lr()), global_step
-            )
+        writer.add_scalar("losses/lr_schedular", np.mean(sched.get_last_lr()), global_step)
 
 if __name__ == "__main__":
     main()

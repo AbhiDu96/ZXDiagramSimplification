@@ -1,0 +1,2250 @@
+{
+ "seeds": [
+  {
+   "events": [
+    {
+     "actions": [
+      784,
+      874,
+      486,
+      340
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": -0.0,
+     "logit": 0.0,
+     "new_rewards": [
+      0.0,
+      0.16666666666666663,
+      0.16666666666666663,
+      -0.08333333333333326
+     ],
+     "selected_node": 0,
+     "step": 0,
+     "term": false,
+     "tree_size": 5,
+     "trunc": false,
+     "value": 15.084035873413086
+    },
+    {
+     "actions": [
+      504,
+      856,
+      825,
+      842
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 1.3349955081939697,
+     "logit": -0.6251083016395569,
+     "new_rewards": [
+      0.0,
+      0.0,
+      0.16666666666666663,
+      0.16666666666666663
+     ],
+     "selected_node": 0,
+     "step": 1,
+     "term": false,
+     "tree_size": 9,
+     "trunc": false,
+     "value": 16.679758071899414
+    },
+    {
+     "actions": [
+      529,
+      874,
+      735,
+      441
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 1.9751628637313843,
+     "logit": -2.5358028411865234,
+     "new_rewards": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "selected_node": 6,
+     "step": 2,
+     "term": false,
+     "tree_size": 13,
+     "trunc": false,
+     "value": 17.25148582458496
+    },
+    {
+     "actions": [
+      464,
+      348,
+      361,
+      697
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 2.175631046295166,
+     "logit": -2.6175339221954346,
+     "new_rewards": [
+      -0.33333333333333326,
+      -0.25,
+      0.0,
+      0.0
+     ],
+     "selected_node": 5,
+     "step": 3,
+     "term": false,
+     "tree_size": 17,
+     "trunc": false,
+     "value": 17.611427307128906
+    },
+    {
+     "actions": [
+      936,
+      668,
+      465,
+      508
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 2.3513922691345215,
+     "logit": -4.195804119110107,
+     "new_rewards": [
+      0.16666666666666663,
+      -0.16666666666666674,
+      0.0,
+      -0.16666666666666674
+     ],
+     "selected_node": 9,
+     "step": 4,
+     "term": false,
+     "tree_size": 21,
+     "trunc": false,
+     "value": 17.83670997619629
+    },
+    {
+     "actions": [
+      680,
+      494,
+      512,
+      705
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 2.407580852508545,
+     "logit": -2.6748123168945312,
+     "new_rewards": [
+      -0.16666666666666674,
+      0.0,
+      -0.16666666666666674,
+      0.0
+     ],
+     "selected_node": 6,
+     "step": 5,
+     "term": false,
+     "tree_size": 25,
+     "trunc": false,
+     "value": 18.047706604003906
+    },
+    {
+     "actions": [
+      734,
+      600,
+      948,
+      691
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 2.5662972927093506,
+     "logit": -2.741274833679199,
+     "new_rewards": [
+      -0.08333333333333326,
+      -0.25,
+      0.16666666666666663,
+      -0.08333333333333326
+     ],
+     "selected_node": 4,
+     "step": 6,
+     "term": false,
+     "tree_size": 29,
+     "trunc": false,
+     "value": 18.21976661682129
+    },
+    {
+     "actions": [
+      509,
+      769,
+      713,
+      329
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 2.7109251022338867,
+     "logit": -1.256272315979004,
+     "new_rewards": [
+      0.16666666666666663,
+      0.16666666666666663,
+      0.16666666666666663,
+      0.16666666666666663
+     ],
+     "selected_node": 0,
+     "step": 7,
+     "term": false,
+     "tree_size": 33,
+     "trunc": false,
+     "value": 18.373863220214844
+    },
+    {
+     "actions": [
+      725,
+      349,
+      612,
+      437
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 2.9462504386901855,
+     "logit": -3.0067801475524902,
+     "new_rewards": [
+      0.16666666666666663,
+      0.16666666666666663,
+      0.0,
+      0.16666666666666663
+     ],
+     "selected_node": 30,
+     "step": 8,
+     "term": false,
+     "tree_size": 37,
+     "trunc": false,
+     "value": 18.51024627685547
+    },
+    {
+     "actions": [
+      777,
+      340,
+      744,
+      697
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 3.0532805919647217,
+     "logit": -1.5184574127197266,
+     "new_rewards": [
+      0.16666666666666663,
+      -0.08333333333333326,
+      0.0,
+      0.16666666666666663
+     ],
+     "selected_node": 0,
+     "step": 9,
+     "term": false,
+     "tree_size": 41,
+     "trunc": false,
+     "value": 18.62704849243164
+    },
+    {
+     "actions": [
+      655,
+      512,
+      310,
+      676
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 3.22623610496521,
+     "logit": -3.22271728515625,
+     "new_rewards": [
+      0.0,
+      -0.16666666666666674,
+      0.0,
+      -0.08333333333333326
+     ],
+     "selected_node": 39,
+     "step": 10,
+     "term": false,
+     "tree_size": 45,
+     "trunc": false,
+     "value": 18.731428146362305
+    },
+    {
+     "actions": [
+      608,
+      421,
+      448,
+      433
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 3.3107962608337402,
+     "logit": -4.772012233734131,
+     "new_rewards": [
+      0.0,
+      0.16666666666666663,
+      -0.16666666666666674,
+      0.16666666666666663
+     ],
+     "selected_node": 27,
+     "step": 11,
+     "term": false,
+     "tree_size": 49,
+     "trunc": false,
+     "value": 18.822586059570312
+    },
+    {
+     "actions": [
+      457,
+      336,
+      643,
+      646
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 3.3401825428009033,
+     "logit": -3.2630114555358887,
+     "new_rewards": [
+      0.16666666666666663,
+      -0.08333333333333326,
+      0.16666666666666663,
+      0.16666666666666663
+     ],
+     "selected_node": 30,
+     "step": 12,
+     "term": false,
+     "tree_size": 53,
+     "trunc": false,
+     "value": 18.91770362854004
+    },
+    {
+     "actions": [
+      717,
+      344,
+      606,
+      373
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 3.419339418411255,
+     "logit": -3.2890400886535645,
+     "new_rewards": [
+      0.16666666666666663,
+      -0.08333333333333326,
+      0.16666666666666663,
+      0.16666666666666663
+     ],
+     "selected_node": 8,
+     "step": 13,
+     "term": false,
+     "tree_size": 57,
+     "trunc": false,
+     "value": 18.99782371520996
+    },
+    {
+     "actions": [
+      616,
+      744,
+      336,
+      602
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 3.4950246810913086,
+     "logit": -1.7973307371139526,
+     "new_rewards": [
+      0.0,
+      0.0,
+      0.16666666666666663,
+      0.16666666666666663
+     ],
+     "selected_node": 0,
+     "step": 14,
+     "term": false,
+     "tree_size": 61,
+     "trunc": false,
+     "value": 19.073728561401367
+    },
+    {
+     "actions": [
+      723,
+      862,
+      405,
+      325
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 3.6080386638641357,
+     "logit": -3.462083339691162,
+     "new_rewards": [
+      0.16666666666666663,
+      0.16666666666666663,
+      0.16666666666666663,
+      0.16666666666666663
+     ],
+     "selected_node": 30,
+     "step": 15,
+     "term": false,
+     "tree_size": 65,
+     "trunc": false,
+     "value": 19.144662857055664
+    },
+    {
+     "actions": [
+      735,
+      361,
+      552,
+      593
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 3.6713829040527344,
+     "logit": -5.00259256362915,
+     "new_rewards": [
+      0.16666666666666663,
+      0.16666666666666663,
+      0.0,
+      0.16666666666666663
+     ],
+     "selected_node": 55,
+     "step": 16,
+     "term": false,
+     "tree_size": 69,
+     "trunc": false,
+     "value": 19.209400177001953
+    },
+    {
+     "actions": [
+      581,
+      760,
+      441,
+      377
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 3.693843126296997,
+     "logit": -5.026482105255127,
+     "new_rewards": [
+      0.0,
+      -0.16666666666666674,
+      0.0,
+      0.0
+     ],
+     "selected_node": 41,
+     "step": 17,
+     "term": false,
+     "tree_size": 73,
+     "trunc": false,
+     "value": 19.2725887298584
+    },
+    {
+     "actions": [
+      325,
+      509,
+      474,
+      600
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 3.715620517730713,
+     "logit": -3.5003223419189453,
+     "new_rewards": [
+      0.16666666666666663,
+      0.16666666666666663,
+      0.16666666666666663,
+      0.08333333333333337
+     ],
+     "selected_node": 32,
+     "step": 18,
+     "term": false,
+     "tree_size": 77,
+     "trunc": false,
+     "value": 19.32727813720703
+    },
+    {
+     "actions": [
+      780,
+      664,
+      842,
+      417
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 3.774954319000244,
+     "logit": -3.5261518955230713,
+     "new_rewards": [
+      0.0,
+      0.08333333333333337,
+      0.16666666666666663,
+      0.16666666666666663
+     ],
+     "selected_node": 7,
+     "step": 19,
+     "term": false,
+     "tree_size": 81,
+     "trunc": false,
+     "value": 19.38226318359375
+    },
+    {
+     "actions": [
+      449,
+      649,
+      569,
+      681
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 3.8319523334503174,
+     "logit": -3.552949905395508,
+     "new_rewards": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "selected_node": 57,
+     "step": 20,
+     "term": false,
+     "tree_size": 85,
+     "trunc": false,
+     "value": 19.433786392211914
+    },
+    {
+     "actions": [
+      497,
+      609,
+      441,
+      616
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 3.8865904808044434,
+     "logit": -2.0455901622772217,
+     "new_rewards": [
+      0.16666666666666663,
+      0.16666666666666663,
+      0.16666666666666663,
+      0.0
+     ],
+     "selected_node": 0,
+     "step": 21,
+     "term": false,
+     "tree_size": 89,
+     "trunc": false,
+     "value": 19.48056411743164
+    },
+    {
+     "actions": [
+      668,
+      405,
+      349,
+      715
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 3.9614381790161133,
+     "logit": -3.68180251121521,
+     "new_rewards": [
+      0.0,
+      0.16666666666666663,
+      0.16666666666666663,
+      0.16666666666666663
+     ],
+     "selected_node": 40,
+     "step": 22,
+     "term": false,
+     "tree_size": 93,
+     "trunc": false,
+     "value": 19.527341842651367
+    },
+    {
+     "actions": [
+      501,
+      460,
+      797,
+      741
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 4.0096025466918945,
+     "logit": -5.239930152893066,
+     "new_rewards": [
+      0.0,
+      -0.16666666666666674,
+      0.0,
+      0.0
+     ],
+     "selected_node": 84,
+     "step": 23,
+     "term": false,
+     "tree_size": 97,
+     "trunc": false,
+     "value": 19.57114601135254
+    },
+    {
+     "actions": [
+      900,
+      812,
+      685,
+      798
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 4.026689529418945,
+     "logit": -6.784348487854004,
+     "new_rewards": [
+      -0.25,
+      -0.33333333333333326,
+      -0.16666666666666674,
+      -0.16666666666666674
+     ],
+     "selected_node": 94,
+     "step": 24,
+     "term": false,
+     "tree_size": 101,
+     "trunc": false,
+     "value": 19.610715866088867
+    },
+    {
+     "actions": [
+      676,
+      752,
+      494,
+      441
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 4.031820774078369,
+     "logit": -3.7082250118255615,
+     "new_rewards": [
+      -0.08333333333333326,
+      -0.16666666666666674,
+      0.0,
+      0.0
+     ],
+     "selected_node": 1,
+     "step": 25,
+     "term": false,
+     "tree_size": 105,
+     "trunc": false,
+     "value": 19.646717071533203
+    },
+    {
+     "actions": [
+      493,
+      691,
+      369,
+      840
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 4.077958583831787,
+     "logit": -3.717536211013794,
+     "new_rewards": [
+      0.16666666666666663,
+      0.16666666666666663,
+      0.16666666666666663,
+      0.0
+     ],
+     "selected_node": 59,
+     "step": 26,
+     "term": false,
+     "tree_size": 109,
+     "trunc": false,
+     "value": 19.685863494873047
+    },
+    {
+     "actions": [
+      541,
+      662,
+      680,
+      397
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 4.123135089874268,
+     "logit": -3.7377824783325195,
+     "new_rewards": [
+      0.16666666666666663,
+      0.16666666666666663,
+      0.08333333333333337,
+      0.16666666666666663
+     ],
+     "selected_node": 3,
+     "step": 27,
+     "term": false,
+     "tree_size": 113,
+     "trunc": false,
+     "value": 19.726652145385742
+    },
+    {
+     "actions": [
+      744,
+      750,
+      369,
+      744
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 4.16700553894043,
+     "logit": -2.241497039794922,
+     "new_rewards": [
+      0.0,
+      0.16666666666666663,
+      0.16666666666666663,
+      0.0
+     ],
+     "selected_node": 0,
+     "step": 28,
+     "term": false,
+     "tree_size": 117,
+     "trunc": false,
+     "value": 19.76702117919922
+    },
+    {
+     "actions": [
+      907,
+      500,
+      452,
+      298
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 4.22165060043335,
+     "logit": -5.39346981048584,
+     "new_rewards": [
+      0.16666666666666663,
+      0.0,
+      -0.16666666666666674,
+      0.16666666666666663
+     ],
+     "selected_node": 61,
+     "step": 29,
+     "term": false,
+     "tree_size": 121,
+     "trunc": false,
+     "value": 19.802854537963867
+    },
+    {
+     "actions": [
+      854,
+      352,
+      680,
+      341
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 4.236049652099609,
+     "logit": -3.8506836891174316,
+     "new_rewards": [
+      0.16666666666666663,
+      -0.08333333333333326,
+      0.08333333333333337,
+      0.16666666666666663
+     ],
+     "selected_node": 114,
+     "step": 30,
+     "term": false,
+     "tree_size": 125,
+     "trunc": false,
+     "value": 19.834075927734375
+    },
+    {
+     "actions": [
+      825,
+      525,
+      385,
+      356
+     ],
+     "best_reward": 0.16666666666666663,
+     "entropy": 4.2752203941345215,
+     "logit": -5.418079376220703,
+     "new_rewards": [
+      -0.16666666666666674,
+      -0.16666666666666674,
+      -0.16666666666666674,
+      -0.41666666666666674
+     ],
+     "selected_node": 21,
+     "step": 31,
+     "term": false,
+     "tree_size": 129,
+     "trunc": false,
+     "value": 19.869258880615234
+    }
+   ],
+   "final_best_twoqubit": 10,
+   "initial_twoqubit": 12,
+   "seed": 0
+  },
+  {
+   "events": [
+    {
+     "actions": [
+      461,
+      629,
+      829,
+      840
+     ],
+     "best_reward": 0.0,
+     "entropy": -0.0,
+     "logit": 0.0,
+     "new_rewards": [
+      0.0,
+      0.0,
+      0.0,
+      -0.09090909090909083
+     ],
+     "selected_node": 0,
+     "step": 0,
+     "term": false,
+     "tree_size": 5,
+     "trunc": false,
+     "value": 15.085800170898438
+    },
+    {
+     "actions": [
+      769,
+      341,
+      670,
+      655
+     ],
+     "best_reward": 0.0,
+     "entropy": 1.3347667455673218,
+     "logit": -2.1543350219726562,
+     "new_rewards": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "selected_node": 1,
+     "step": 1,
+     "term": false,
+     "tree_size": 9,
+     "trunc": false,
+     "value": 16.68459701538086
+    },
+    {
+     "actions": [
+      533,
+      549,
+      659,
+      556
+     ],
+     "best_reward": 0.0,
+     "entropy": 1.645228385925293,
+     "logit": -0.7206559777259827,
+     "new_rewards": [
+      0.0,
+      0.0,
+      0.0,
+      -0.18181818181818188
+     ],
+     "selected_node": 0,
+     "step": 2,
+     "term": false,
+     "tree_size": 13,
+     "trunc": false,
+     "value": 17.270761489868164
+    },
+    {
+     "actions": [
+      788,
+      708,
+      490,
+      737
+     ],
+     "best_reward": 0.0,
+     "entropy": 2.1760969161987305,
+     "logit": -1.0718201398849487,
+     "new_rewards": [
+      -0.18181818181818188,
+      -0.18181818181818188,
+      0.0,
+      0.0
+     ],
+     "selected_node": 0,
+     "step": 3,
+     "term": false,
+     "tree_size": 17,
+     "trunc": false,
+     "value": 17.63045883178711
+    },
+    {
+     "actions": [
+      345,
+      541,
+      417,
+      298
+     ],
+     "best_reward": 0.0,
+     "entropy": 2.533318519592285,
+     "logit": -1.3319694995880127,
+     "new_rewards": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "selected_node": 0,
+     "step": 4,
+     "term": false,
+     "tree_size": 21,
+     "trunc": false,
+     "value": 17.897302627563477
+    },
+    {
+     "actions": [
+      366,
+      469,
+      916,
+      742
+     ],
+     "best_reward": 0.0,
+     "entropy": 2.800554037094116,
+     "logit": -3.0790257453918457,
+     "new_rewards": [
+      -0.18181818181818188,
+      -0.18181818181818188,
+      0.0,
+      -0.18181818181818188
+     ],
+     "selected_node": 12,
+     "step": 5,
+     "term": false,
+     "tree_size": 25,
+     "trunc": false,
+     "value": 18.112903594970703
+    },
+    {
+     "actions": [
+      609,
+      585,
+      294,
+      489
+     ],
+     "best_reward": 0.0,
+     "entropy": 2.908851385116577,
+     "logit": -3.1071243286132812,
+     "new_rewards": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "selected_node": 17,
+     "step": 6,
+     "term": false,
+     "tree_size": 29,
+     "trunc": false,
+     "value": 18.282194137573242
+    },
+    {
+     "actions": [
+      358,
+      840,
+      613,
+      345
+     ],
+     "best_reward": 0.0,
+     "entropy": 3.0113525390625,
+     "logit": -1.615630030632019,
+     "new_rewards": [
+      0.0,
+      -0.09090909090909083,
+      0.0,
+      0.0
+     ],
+     "selected_node": 0,
+     "step": 7,
+     "term": false,
+     "tree_size": 33,
+     "trunc": false,
+     "value": 18.43107032775879
+    },
+    {
+     "actions": [
+      773,
+      348,
+      916,
+      766
+     ],
+     "best_reward": 0.0,
+     "entropy": 3.1899821758270264,
+     "logit": -3.2983827590942383,
+     "new_rewards": [
+      -0.09090909090909083,
+      -0.2727272727272727,
+      0.0,
+      -0.09090909090909083
+     ],
+     "selected_node": 30,
+     "step": 8,
+     "term": false,
+     "tree_size": 37,
+     "trunc": false,
+     "value": 18.56256675720215
+    },
+    {
+     "actions": [
+      647,
+      700,
+      425,
+      817
+     ],
+     "best_reward": 0.0,
+     "entropy": 3.272749900817871,
+     "logit": -3.3363351821899414,
+     "new_rewards": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "selected_node": 1,
+     "step": 9,
+     "term": false,
+     "tree_size": 41,
+     "trunc": false,
+     "value": 18.68145751953125
+    },
+    {
+     "actions": [
+      609,
+      305,
+      782,
+      354
+     ],
+     "best_reward": 0.0,
+     "entropy": 3.350802183151245,
+     "logit": -3.366732120513916,
+     "new_rewards": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "selected_node": 1,
+     "step": 10,
+     "term": false,
+     "tree_size": 45,
+     "trunc": false,
+     "value": 18.784481048583984
+    },
+    {
+     "actions": [
+      549,
+      436,
+      655,
+      829
+     ],
+     "best_reward": 0.0,
+     "entropy": 3.425199031829834,
+     "logit": -1.8667166233062744,
+     "new_rewards": [
+      0.0,
+      -0.18181818181818188,
+      0.0,
+      0.0
+     ],
+     "selected_node": 0,
+     "step": 11,
+     "term": false,
+     "tree_size": 49,
+     "trunc": false,
+     "value": 18.878067016601562
+    },
+    {
+     "actions": [
+      832,
+      713,
+      655,
+      664
+     ],
+     "best_reward": 0.0,
+     "entropy": 3.5475242137908936,
+     "logit": -3.5219926834106445,
+     "new_rewards": [
+      0.0,
+      0.0,
+      0.0,
+      -0.18181818181818188
+     ],
+     "selected_node": 10,
+     "step": 12,
+     "term": false,
+     "tree_size": 53,
+     "trunc": false,
+     "value": 18.962322235107422
+    },
+    {
+     "actions": [
+      354,
+      513,
+      713,
+      776
+     ],
+     "best_reward": 0.0,
+     "entropy": 3.610368251800537,
+     "logit": -3.5472891330718994,
+     "new_rewards": [
+      0.0,
+      0.0,
+      0.0,
+      -0.18181818181818188
+     ],
+     "selected_node": 17,
+     "step": 13,
+     "term": false,
+     "tree_size": 57,
+     "trunc": false,
+     "value": 19.040340423583984
+    },
+    {
+     "actions": [
+      817,
+      647,
+      725,
+      609
+     ],
+     "best_reward": 0.0,
+     "entropy": 3.670644521713257,
+     "logit": -3.5718815326690674,
+     "new_rewards": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "selected_node": 32,
+     "step": 14,
+     "term": false,
+     "tree_size": 61,
+     "trunc": false,
+     "value": 19.111328125
+    },
+    {
+     "actions": [
+      552,
+      413,
+      808,
+      836
+     ],
+     "best_reward": 0.0,
+     "entropy": 3.7286386489868164,
+     "logit": -3.595884323120117,
+     "new_rewards": [
+      -0.18181818181818188,
+      0.0,
+      -0.18181818181818188,
+      -0.09090909090909083
+     ],
+     "selected_node": 3,
+     "step": 15,
+     "term": false,
+     "tree_size": 65,
+     "trunc": false,
+     "value": 19.178043365478516
+    },
+    {
+     "actions": [
+      305,
+      761,
+      720,
+      405
+     ],
+     "best_reward": 0.0,
+     "entropy": 3.7844247817993164,
+     "logit": -3.6192731857299805,
+     "new_rewards": [
+      0.0,
+      0.0,
+      -0.18181818181818188,
+      0.0
+     ],
+     "selected_node": 17,
+     "step": 16,
+     "term": false,
+     "tree_size": 69,
+     "trunc": false,
+     "value": 19.238794326782227
+    },
+    {
+     "actions": [
+      667,
+      671,
+      493,
+      679
+     ],
+     "best_reward": 0.0,
+     "entropy": 3.838202953338623,
+     "logit": -5.142461776733398,
+     "new_rewards": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "selected_node": 35,
+     "step": 17,
+     "term": false,
+     "tree_size": 73,
+     "trunc": false,
+     "value": 19.296321868896484
+    },
+    {
+     "actions": [
+      746,
+      828,
+      761,
+      449
+     ],
+     "best_reward": 0.0,
+     "entropy": 3.8578591346740723,
+     "logit": -3.6472883224487305,
+     "new_rewards": [
+      0.0,
+      -0.09090909090909083,
+      0.0,
+      0.0
+     ],
+     "selected_node": 31,
+     "step": 18,
+     "term": false,
+     "tree_size": 77,
+     "trunc": false,
+     "value": 19.36097526550293
+    },
+    {
+     "actions": [
+      585,
+      828,
+      670,
+      761
+     ],
+     "best_reward": 0.0,
+     "entropy": 3.909317970275879,
+     "logit": -3.669618844985962,
+     "new_rewards": [
+      0.0,
+      -0.09090909090909083,
+      0.0,
+      0.0
+     ],
+     "selected_node": 1,
+     "step": 19,
+     "term": false,
+     "tree_size": 81,
+     "trunc": false,
+     "value": 19.41391372680664
+    },
+    {
+     "actions": [
+      396,
+      468,
+      485,
+      474
+     ],
+     "best_reward": 0.0,
+     "entropy": 3.959075450897217,
+     "logit": -5.224278450012207,
+     "new_rewards": [
+      -0.18181818181818188,
+      -0.18181818181818188,
+      0.0,
+      0.0
+     ],
+     "selected_node": 25,
+     "step": 20,
+     "term": false,
+     "tree_size": 85,
+     "trunc": false,
+     "value": 19.464698791503906
+    },
+    {
+     "actions": [
+      492,
+      924,
+      613,
+      420
+     ],
+     "best_reward": 0.0,
+     "entropy": 3.976623058319092,
+     "logit": -3.7070565223693848,
+     "new_rewards": [
+      -0.36363636363636354,
+      0.0,
+      -0.18181818181818188,
+      -0.18181818181818188
+     ],
+     "selected_node": 12,
+     "step": 21,
+     "term": false,
+     "tree_size": 89,
+     "trunc": false,
+     "value": 19.51029396057129
+    },
+    {
+     "actions": [
+      824,
+      448,
+      348,
+      667
+     ],
+     "best_reward": 0.0,
+     "entropy": 4.023831367492676,
+     "logit": -3.720510959625244,
+     "new_rewards": [
+      -0.36363636363636354,
+      -0.2727272727272727,
+      -0.18181818181818188,
+      -0.18181818181818188
+     ],
+     "selected_node": 13,
+     "step": 22,
+     "term": false,
+     "tree_size": 93,
+     "trunc": false,
+     "value": 19.554292678833008
+    },
+    {
+     "actions": [
+      492,
+      789,
+      684,
+      348
+     ],
+     "best_reward": 0.0,
+     "entropy": 4.069731712341309,
+     "logit": -3.731652021408081,
+     "new_rewards": [
+      -0.2727272727272727,
+      -0.09090909090909083,
+      -0.2727272727272727,
+      -0.2727272727272727
+     ],
+     "selected_node": 4,
+     "step": 23,
+     "term": false,
+     "tree_size": 97,
+     "trunc": false,
+     "value": 19.595849990844727
+    },
+    {
+     "actions": [
+      651,
+      773,
+      737,
+      501
+     ],
+     "best_reward": 0.0,
+     "entropy": 4.1144819259643555,
+     "logit": -2.228811264038086,
+     "new_rewards": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "selected_node": 0,
+     "step": 24,
+     "term": false,
+     "tree_size": 101,
+     "trunc": false,
+     "value": 19.636526107788086
+    },
+    {
+     "actions": [
+      420,
+      808,
+      677,
+      696
+     ],
+     "best_reward": 0.0,
+     "entropy": 4.1732611656188965,
+     "logit": -6.916413307189941,
+     "new_rewards": [
+      -0.36363636363636354,
+      0.0,
+      0.0,
+      -0.18181818181818188
+     ],
+     "selected_node": 83,
+     "step": 25,
+     "term": false,
+     "tree_size": 105,
+     "trunc": false,
+     "value": 19.67730140686035
+    },
+    {
+     "actions": [
+      617,
+      481,
+      457,
+      904
+     ],
+     "best_reward": 0.0,
+     "entropy": 4.177762508392334,
+     "logit": -5.383651256561279,
+     "new_rewards": [
+      -0.18181818181818188,
+      -0.18181818181818188,
+      -0.18181818181818188,
+      0.0
+     ],
+     "selected_node": 52,
+     "step": 26,
+     "term": false,
+     "tree_size": 109,
+     "trunc": false,
+     "value": 19.71430015563965
+    },
+    {
+     "actions": [
+      725,
+      544,
+      465,
+      601
+     ],
+     "best_reward": 0.0,
+     "entropy": 4.192553997039795,
+     "logit": -3.8524138927459717,
+     "new_rewards": [
+      0.0,
+      -0.18181818181818188,
+      0.0,
+      0.0
+     ],
+     "selected_node": 17,
+     "step": 27,
+     "term": false,
+     "tree_size": 113,
+     "trunc": false,
+     "value": 19.75090980529785
+    },
+    {
+     "actions": [
+      713,
+      688,
+      521,
+      409
+     ],
+     "best_reward": 0.0,
+     "entropy": 4.23214054107666,
+     "logit": -3.85740065574646,
+     "new_rewards": [
+      0.0,
+      -0.18181818181818188,
+      0.0,
+      0.0
+     ],
+     "selected_node": 20,
+     "step": 28,
+     "term": false,
+     "tree_size": 117,
+     "trunc": false,
+     "value": 19.785655975341797
+    },
+    {
+     "actions": [
+      393,
+      725,
+      354,
+      746
+     ],
+     "best_reward": 0.0,
+     "entropy": 4.271224498748779,
+     "logit": -3.8888397216796875,
+     "new_rewards": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "selected_node": 18,
+     "step": 29,
+     "term": false,
+     "tree_size": 121,
+     "trunc": false,
+     "value": 19.822444915771484
+    },
+    {
+     "actions": [
+      659,
+      340,
+      704,
+      717
+     ],
+     "best_reward": 0.0,
+     "entropy": 4.308800220489502,
+     "logit": -3.903153896331787,
+     "new_rewards": [
+      0.0,
+      -0.18181818181818188,
+      0.0,
+      0.0
+     ],
+     "selected_node": 11,
+     "step": 30,
+     "term": false,
+     "tree_size": 125,
+     "trunc": false,
+     "value": 19.856258392333984
+    },
+    {
+     "actions": [
+      651,
+      840,
+      521,
+      545
+     ],
+     "best_reward": 0.0,
+     "entropy": 4.345527648925781,
+     "logit": -3.9238288402557373,
+     "new_rewards": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "selected_node": 3,
+     "step": 31,
+     "term": false,
+     "tree_size": 129,
+     "trunc": false,
+     "value": 19.889556884765625
+    }
+   ],
+   "final_best_twoqubit": 11,
+   "initial_twoqubit": 11,
+   "seed": 1
+  },
+  {
+   "events": [
+    {
+     "actions": [
+      577,
+      642,
+      756,
+      841
+     ],
+     "best_reward": 0.125,
+     "entropy": -0.0,
+     "logit": 0.0,
+     "new_rewards": [
+      0.125,
+      0.125,
+      0.125,
+      0.125
+     ],
+     "selected_node": 0,
+     "step": 0,
+     "term": false,
+     "tree_size": 5,
+     "trunc": false,
+     "value": 15.059310913085938
+    },
+    {
+     "actions": [
+      360,
+      829,
+      737,
+      713
+     ],
+     "best_reward": 0.125,
+     "entropy": 1.337639331817627,
+     "logit": -0.6283462643623352,
+     "new_rewards": [
+      -0.125,
+      0.125,
+      0.125,
+      0.125
+     ],
+     "selected_node": 0,
+     "step": 1,
+     "term": false,
+     "tree_size": 9,
+     "trunc": false,
+     "value": 16.683019638061523
+    },
+    {
+     "actions": [
+      903,
+      380,
+      476,
+      716
+     ],
+     "best_reward": 0.25,
+     "entropy": 1.976686954498291,
+     "logit": -2.5343120098114014,
+     "new_rewards": [
+      0.25,
+      -0.125,
+      0.0,
+      0.0
+     ],
+     "selected_node": 7,
+     "step": 2,
+     "term": false,
+     "tree_size": 13,
+     "trunc": false,
+     "value": 17.238723754882812
+    },
+    {
+     "actions": [
+      937,
+      944,
+      577,
+      656
+     ],
+     "best_reward": 0.25,
+     "entropy": 2.1770191192626953,
+     "logit": -1.074190616607666,
+     "new_rewards": [
+      0.125,
+      0.0,
+      0.125,
+      0.0
+     ],
+     "selected_node": 0,
+     "step": 3,
+     "term": false,
+     "tree_size": 17,
+     "trunc": false,
+     "value": 17.59031867980957
+    },
+    {
+     "actions": [
+      642,
+      360,
+      480,
+      529
+     ],
+     "best_reward": 0.25,
+     "entropy": 2.533780574798584,
+     "logit": -1.3335645198822021,
+     "new_rewards": [
+      0.125,
+      -0.125,
+      0.0,
+      0.125
+     ],
+     "selected_node": 0,
+     "step": 4,
+     "term": false,
+     "tree_size": 21,
+     "trunc": false,
+     "value": 17.855186462402344
+    },
+    {
+     "actions": [
+      844,
+      684,
+      542,
+      648
+     ],
+     "best_reward": 0.25,
+     "entropy": 2.800729513168335,
+     "logit": -3.0658512115478516,
+     "new_rewards": [
+      0.0,
+      0.125,
+      0.125,
+      0.0625
+     ],
+     "selected_node": 13,
+     "step": 5,
+     "term": false,
+     "tree_size": 25,
+     "trunc": false,
+     "value": 18.063766479492188
+    },
+    {
+     "actions": [
+      368,
+      392,
+      825,
+      396
+     ],
+     "best_reward": 0.25,
+     "entropy": 2.9103376865386963,
+     "logit": -3.0947437286376953,
+     "new_rewards": [
+      -0.125,
+      -0.125,
+      0.125,
+      0.0625
+     ],
+     "selected_node": 3,
+     "step": 6,
+     "term": false,
+     "tree_size": 29,
+     "trunc": false,
+     "value": 18.241262435913086
+    },
+    {
+     "actions": [
+      792,
+      578,
+      797,
+      841
+     ],
+     "best_reward": 0.25,
+     "entropy": 3.013747215270996,
+     "logit": -4.6703643798828125,
+     "new_rewards": [
+      -0.25,
+      -0.125,
+      -0.125,
+      -0.125
+     ],
+     "selected_node": 26,
+     "step": 7,
+     "term": false,
+     "tree_size": 33,
+     "trunc": false,
+     "value": 18.388330459594727
+    },
+    {
+     "actions": [
+      749,
+      773,
+      709,
+      542
+     ],
+     "best_reward": 0.25,
+     "entropy": 3.0472793579101562,
+     "logit": -3.1522750854492188,
+     "new_rewards": [
+      0.125,
+      0.125,
+      0.125,
+      0.125
+     ],
+     "selected_node": 13,
+     "step": 8,
+     "term": false,
+     "tree_size": 37,
+     "trunc": false,
+     "value": 18.504138946533203
+    },
+    {
+     "actions": [
+      620,
+      616,
+      669,
+      716
+     ],
+     "best_reward": 0.25,
+     "entropy": 3.142136573791504,
+     "logit": -3.1778078079223633,
+     "new_rewards": [
+      0.0625,
+      0.0,
+      0.125,
+      0.0
+     ],
+     "selected_node": 3,
+     "step": 9,
+     "term": false,
+     "tree_size": 41,
+     "trunc": false,
+     "value": 18.62096405029297
+    },
+    {
+     "actions": [
+      481,
+      925,
+      525,
+      812
+     ],
+     "best_reward": 0.25,
+     "entropy": 3.2327728271484375,
+     "logit": -3.2245850563049316,
+     "new_rewards": [
+      0.125,
+      0.125,
+      0.125,
+      0.0
+     ],
+     "selected_node": 8,
+     "step": 10,
+     "term": false,
+     "tree_size": 45,
+     "trunc": false,
+     "value": 18.730405807495117
+    },
+    {
+     "actions": [
+      638,
+      720,
+      409,
+      925
+     ],
+     "best_reward": 0.25,
+     "entropy": 3.3172624111175537,
+     "logit": -3.2584147453308105,
+     "new_rewards": [
+      0.125,
+      0.0,
+      0.125,
+      0.125
+     ],
+     "selected_node": 8,
+     "step": 11,
+     "term": false,
+     "tree_size": 49,
+     "trunc": false,
+     "value": 18.82239532470703
+    },
+    {
+     "actions": [
+      420,
+      700,
+      804,
+      900
+     ],
+     "best_reward": 0.25,
+     "entropy": 3.397573947906494,
+     "logit": -3.2781624794006348,
+     "new_rewards": [
+      -0.125,
+      0.125,
+      0.0,
+      0.0
+     ],
+     "selected_node": 2,
+     "step": 12,
+     "term": false,
+     "tree_size": 53,
+     "trunc": false,
+     "value": 18.90880584716797
+    },
+    {
+     "actions": [
+      542,
+      752,
+      773,
+      741
+     ],
+     "best_reward": 0.25,
+     "entropy": 3.4747018814086914,
+     "logit": -3.3236944675445557,
+     "new_rewards": [
+      0.125,
+      0.125,
+      0.125,
+      0.125
+     ],
+     "selected_node": 4,
+     "step": 13,
+     "term": false,
+     "tree_size": 57,
+     "trunc": false,
+     "value": 18.989866256713867
+    },
+    {
+     "actions": [
+      838,
+      921,
+      561,
+      744
+     ],
+     "best_reward": 0.25,
+     "entropy": 3.547332525253296,
+     "logit": -3.372746467590332,
+     "new_rewards": [
+      -0.125,
+      -0.125,
+      -0.125,
+      -0.25
+     ],
+     "selected_node": 18,
+     "step": 14,
+     "term": false,
+     "tree_size": 61,
+     "trunc": false,
+     "value": 19.064586639404297
+    },
+    {
+     "actions": [
+      808,
+      393,
+      477,
+      393
+     ],
+     "best_reward": 0.25,
+     "entropy": 3.615131139755249,
+     "logit": -4.9130659103393555,
+     "new_rewards": [
+      0.0,
+      0.125,
+      0.125,
+      0.125
+     ],
+     "selected_node": 42,
+     "step": 15,
+     "term": false,
+     "tree_size": 65,
+     "trunc": false,
+     "value": 19.122602462768555
+    },
+    {
+     "actions": [
+      542,
+      765,
+      574,
+      785
+     ],
+     "best_reward": 0.25,
+     "entropy": 3.6392874717712402,
+     "logit": -3.3897151947021484,
+     "new_rewards": [
+      0.125,
+      0.125,
+      0.125,
+      0.125
+     ],
+     "selected_node": 1,
+     "step": 16,
+     "term": false,
+     "tree_size": 69,
+     "trunc": false,
+     "value": 19.184465408325195
+    },
+    {
+     "actions": [
+      612,
+      529,
+      365,
+      841
+     ],
+     "best_reward": 0.25,
+     "entropy": 3.704592227935791,
+     "logit": -1.8922398090362549,
+     "new_rewards": [
+      0.0625,
+      0.125,
+      0.125,
+      0.125
+     ],
+     "selected_node": 0,
+     "step": 17,
+     "term": false,
+     "tree_size": 73,
+     "trunc": false,
+     "value": 19.246538162231445
+    },
+    {
+     "actions": [
+      638,
+      753,
+      328,
+      404
+     ],
+     "best_reward": 0.25,
+     "entropy": 3.794567108154297,
+     "logit": -3.541875123977661,
+     "new_rewards": [
+      0.125,
+      0.125,
+      0.125,
+      -0.125
+     ],
+     "selected_node": 8,
+     "step": 18,
+     "term": false,
+     "tree_size": 77,
+     "trunc": false,
+     "value": 19.3046932220459
+    },
+    {
+     "actions": [
+      844,
+      452,
+      621,
+      705
+     ],
+     "best_reward": 0.25,
+     "entropy": 3.850654363632202,
+     "logit": -5.059203147888184,
+     "new_rewards": [
+      0.0,
+      0.125,
+      0.125,
+      0.125
+     ],
+     "selected_node": 50,
+     "step": 19,
+     "term": false,
+     "tree_size": 81,
+     "trunc": false,
+     "value": 19.358318328857422
+    },
+    {
+     "actions": [
+      878,
+      621,
+      785,
+      884
+     ],
+     "best_reward": 0.25,
+     "entropy": 3.8714756965637207,
+     "logit": -5.078440189361572,
+     "new_rewards": [
+      0.0,
+      0.0,
+      0.0,
+      -0.125
+     ],
+     "selected_node": 51,
+     "step": 20,
+     "term": false,
+     "tree_size": 85,
+     "trunc": false,
+     "value": 19.416353225708008
+    },
+    {
+     "actions": [
+      488,
+      1008,
+      594,
+      445
+     ],
+     "best_reward": 0.25,
+     "entropy": 3.891685962677002,
+     "logit": -3.5668458938598633,
+     "new_rewards": [
+      0.0,
+      0.0625,
+      0.125,
+      0.125
+     ],
+     "selected_node": 3,
+     "step": 21,
+     "term": false,
+     "tree_size": 89,
+     "trunc": false,
+     "value": 19.465518951416016
+    },
+    {
+     "actions": [
+      436,
+      788,
+      509,
+      484
+     ],
+     "best_reward": 0.25,
+     "entropy": 3.9450716972351074,
+     "logit": -5.137942314147949,
+     "new_rewards": [
+      0.0,
+      -0.125,
+      0.0,
+      -0.125
+     ],
+     "selected_node": 44,
+     "step": 22,
+     "term": false,
+     "tree_size": 93,
+     "trunc": false,
+     "value": 19.51531410217285
+    },
+    {
+     "actions": [
+      640,
+      672,
+      636,
+      665
+     ],
+     "best_reward": 0.25,
+     "entropy": 3.963817596435547,
+     "logit": -5.136997699737549,
+     "new_rewards": [
+      0.0,
+      0.125,
+      0.0625,
+      0.125
+     ],
+     "selected_node": 41,
+     "step": 23,
+     "term": false,
+     "tree_size": 97,
+     "trunc": false,
+     "value": 19.55558204650879
+    },
+    {
+     "actions": [
+      681,
+      425,
+      661,
+      810
+     ],
+     "best_reward": 0.25,
+     "entropy": 3.9825825691223145,
+     "logit": -2.085991382598877,
+     "new_rewards": [
+      0.125,
+      0.125,
+      0.125,
+      0.125
+     ],
+     "selected_node": 0,
+     "step": 24,
+     "term": false,
+     "tree_size": 101,
+     "trunc": false,
+     "value": 19.59709930419922
+    },
+    {
+     "actions": [
+      716,
+      765,
+      521,
+      604
+     ],
+     "best_reward": 0.25,
+     "entropy": 4.048941612243652,
+     "logit": -5.244831085205078,
+     "new_rewards": [
+      0.0,
+      0.125,
+      0.125,
+      0.0625
+     ],
+     "selected_node": 74,
+     "step": 25,
+     "term": false,
+     "tree_size": 105,
+     "trunc": false,
+     "value": 19.63888168334961
+    },
+    {
+     "actions": [
+      865,
+      409,
+      1012,
+      340
+     ],
+     "best_reward": 0.25,
+     "entropy": 4.065863609313965,
+     "logit": -3.737898111343384,
+     "new_rewards": [
+      -0.125,
+      -0.125,
+      0.125,
+      -0.125
+     ],
+     "selected_node": 18,
+     "step": 26,
+     "term": false,
+     "tree_size": 109,
+     "trunc": false,
+     "value": 19.67667579650879
+    },
+    {
+     "actions": [
+      573,
+      765,
+      469,
+      565
+     ],
+     "best_reward": 0.25,
+     "entropy": 4.110472679138184,
+     "logit": -3.7400481700897217,
+     "new_rewards": [
+      0.125,
+      0.125,
+      0.125,
+      0.125
+     ],
+     "selected_node": 8,
+     "step": 27,
+     "term": false,
+     "tree_size": 113,
+     "trunc": false,
+     "value": 19.71192169189453
+    },
+    {
+     "actions": [
+      826,
+      597,
+      782,
+      436
+     ],
+     "best_reward": 0.25,
+     "entropy": 4.154221057891846,
+     "logit": -5.292527198791504,
+     "new_rewards": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "selected_node": 46,
+     "step": 28,
+     "term": false,
+     "tree_size": 117,
+     "trunc": false,
+     "value": 19.747928619384766
+    },
+    {
+     "actions": [
+      896,
+      357,
+      664,
+      768
+     ],
+     "best_reward": 0.3125,
+     "entropy": 4.170179843902588,
+     "logit": -3.75166916847229,
+     "new_rewards": [
+      0.3125,
+      0.125,
+      0.0625,
+      0.125
+     ],
+     "selected_node": 2,
+     "step": 29,
+     "term": false,
+     "tree_size": 121,
+     "trunc": false,
+     "value": 19.78264617919922
+    },
+    {
+     "actions": [
+      617,
+      816,
+      1060,
+      593
+     ],
+     "best_reward": 0.3125,
+     "entropy": 4.213044166564941,
+     "logit": -5.2893829345703125,
+     "new_rewards": [
+      0.0625,
+      -0.0625,
+      0.125,
+      0.0625
+     ],
+     "selected_node": 37,
+     "step": 30,
+     "term": false,
+     "tree_size": 125,
+     "trunc": false,
+     "value": 19.822267532348633
+    },
+    {
+     "actions": [
+      741,
+      753,
+      557,
+      525
+     ],
+     "best_reward": 0.3125,
+     "entropy": 4.228933811187744,
+     "logit": -3.7898874282836914,
+     "new_rewards": [
+      0.125,
+      0.125,
+      0.125,
+      0.125
+     ],
+     "selected_node": 15,
+     "step": 31,
+     "term": false,
+     "tree_size": 129,
+     "trunc": false,
+     "value": 19.857629776000977
+    }
+   ],
+   "final_best_twoqubit": 11,
+   "initial_twoqubit": 16,
+   "seed": 2
+  }
+ ],
+ "synchronous_forward": {
+  "entropies": [
+   4.289170742034912,
+   4.381185531616211,
+   4.269268035888672
+  ],
+  "logits": [
+   -2.3559186458587646,
+   -2.4113006591796875,
+   -2.2828633785247803
+  ],
+  "tree_vals": [
+   19.89750862121582,
+   19.921436309814453,
+   19.88882827758789
+  ]
+ }
+}

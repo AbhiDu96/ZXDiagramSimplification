@@ -1,0 +1,63 @@
+[project]
+name = "zxdiagramsimplification"
+version = "0.1.0"
+description = "RL + GNN training for optimizing quantum circuits via ZX diagrams (arXiv:2504.03429)"
+readme = "Readme.md"
+requires-python = ">=3.10"
+dependencies = [
+    # local RL environment package (pins pyzx==0.8.0 and numpy<2)
+    "zx_env",
+    # core training path (ppo.py / main_tree.py and their import chain)
+    "torch",
+    "torch-geometric",
+    "gymnasium",
+    "numpy<2",
+    "ray",
+    "hydra-core",
+    "omegaconf",
+    "tensorboard",
+    "tqdm",
+    "networkx",
+    "anytree",
+]
+
+[project.optional-dependencies]
+# Compiler benchmarking scripts (bench_compilers.py, zx_compiler.py)
+benchmark = [
+    "bqskit",
+    "qiskit",
+    "qiskit-ibm-transpiler",
+    "pandas",
+    "seaborn",
+    "matplotlib",
+]
+# Graph-similarity / SHAP analysis scripts (GraphSimilarity.py, data_generation.py, ShapExplainer.py)
+# NOTE: GraphSimilarity.py and data_generation.py additionally require `torch-scatter`,
+# which must be installed manually against your exact torch build, e.g.:
+#   uv pip install torch-scatter --no-build-isolation
+analysis = [
+    "pytorch-metric-learning",
+    "shap",
+    "matplotlib",
+]
+
+[dependency-groups]
+dev = ["pytest"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = [
+    # zx_env relies on numpy 1.x scalar-conversion semantics (int(np.where(...)[0]));
+    # this is why numpy is pinned <2. Silence the expected deprecation noise in tests.
+    "ignore:Conversion of an array with ndim.*:DeprecationWarning",
+    "ignore::UserWarning:hydra",
+]
+
+# ZXDiagramSimplification is a flat collection of scripts, not an installable package.
+[tool.uv]
+package = false
+
+# Resolve the local environment package from the sibling directory (editable).
+[tool.uv.sources]
+zx_env = { path = "../pyzx_environment", editable = true }

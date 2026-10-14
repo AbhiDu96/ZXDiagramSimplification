@@ -47,7 +47,7 @@ def expand_graph(graph: data.Data) -> data.Data:
 
 class GraphMakeDirected(gym.ObservationWrapper):
     def __init__(self,env):
-        self.env = env
+        super().__init__(env)
     def observation(self, observation: Any) -> Any:
         [state, action_masks, statezx, _, _, _] = observation
         n_raw_edges = state.edge_index.shape[1]//2
@@ -66,7 +66,7 @@ class GraphMakeDirected(gym.ObservationWrapper):
 
 class GraphMaskWrapper(gym.ObservationWrapper):
     def __init__(self, env, device):
-        self.env = env
+        super().__init__(env)
         self.device=device
 
     def observation(self, observation: Any) -> GraphMask:
@@ -102,10 +102,10 @@ class GraphMaskWrapper(gym.ObservationWrapper):
 
 class RewardTransform(gym.RewardWrapper):
     def __init__(self,env,weight=1,frequency=10000):
+        super().__init__(env)
         self.frequency = frequency
         self.idx=0
         self.doneflage=False
-        self.env=env
         self.weight=weight
     def reward(self,reward):
         return reward*self.weight if self.idx % self.frequency ==0 or self.doneflage else 0
@@ -129,7 +129,7 @@ class SingleVecEnv(gym.Env):
         self.n_steps = np.zeros(len(envs))
         self.cfg = cfg
 
-    def step(self, actions: [(int, int)]):
+    def step(self, actions: list[tuple[int, int]]):
         next_obs, reward, terminations, truncations, infos = (
             [],
             [],
@@ -163,9 +163,9 @@ class SingleVecEnv(gym.Env):
         self,initial_circuit_graph=None
     ):
         if initial_circuit_graph is None:
-            return zip(*map(lambda x: x.reset(), self.envs))
+            return zip(*(x.reset() for x in self.envs))
         else:
-            return zip(*map(lambda x: x[0].reset(initial_circuit_graph=x[1]), zip(self.envs,initial_circuit_graph)))
+            return zip(*(x[0].reset(initial_circuit_graph=x[1]) for x in zip(self.envs,initial_circuit_graph)))
     def __getitem__(self,idx):
         return self.envs[idx]
 
@@ -176,7 +176,7 @@ if __name__ == "__main__":
     edge_features = torch.tensor([10, 20, 30, 40])
     d = data.Data(x, edge_index=edge_index, edge_attr=edge_features)
     old = torch_geometric.utils.to_networkx(d)
-    nx.draw()
+    nx.draw(old)
     print("d", d)
     exp = expand_graph(d)
     print("exp", exp)

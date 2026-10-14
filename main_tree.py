@@ -46,7 +46,7 @@ def deploy_train(cfg, agent):
     next_obs = start_tree(next_obs.Graph, next_obs.state_zx_graph, info=infos, multi_range=cfg.multi_range)
     actions = torch.zeros((cfg.algorithm.num_steps, 1+cfg.multi_range))
     next_done = 0
-    for step in range(0, cfg.algorithm.num_steps):
+    for step in range(cfg.algorithm.num_steps):
         logging.info("done flag: %s", next_done)
         obs[step] = next_obs
         dones[step] = next_done
@@ -57,7 +57,7 @@ def deploy_train(cfg, agent):
             effect, total_log, _, value = next_obs.select(agent)
             values[step] = torch.tensor(value).flatten()
         #print("Efffect output",effect,actions.shape,next_obs.multi_range)
-        actions[step] = torch.tensor(effect)
+        actions[step] = torch.tensor([effect.node_idx, *effect.actions])
         logprobs[step] = torch.tensor(total_log).detach()
 
         # TRY NOT TO MODIFY: execute the game and log data.
@@ -150,15 +150,12 @@ def main(cfg: DictConfig):
     writer = SummaryWriter(f"runs/{run_name}")
     writer.add_text(
         "hyperparameters",
-        "|param|value|\n|-|-|\n%s"
-        % (
-            "\n".join(
+        "|param|value|\n|-|-|\n{}".format("\n".join(
                 [
                     f"|{key}|{value}|"
                     for key, value in OmegaConf.to_container(cfg, resolve=True).items()
                 ]
-            )
-        ),
+            )),
     )
 
     # TRY NOT TO MODIFY: seeding

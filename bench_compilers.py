@@ -1,213 +1,22 @@
-import bqskit
-from bqskit.compiler import Workflow
-from bqskit.passes import (
-    QuickPartitioner,
-    ForEachBlockPass,
-    ScanningGateRemovalPass,
-    UnfoldPass,
-    ClusteringPartitioner,
-    ScanPartitioner,
-    ExhaustiveGateRemovalPass,
-)
-import bqskit
-from bqskit.ext import qiskit_to_bqskit
-from bqskit.compiler import Compiler
-from bqskit.compiler.basepass import BasePass
-from bqskit.ir.gates import CircuitGate, CNOTGate, CZGate
-from bqskit_pass import (
-    PrintCNOTsPass,
-    ConvertZX,
-    cnot_count_scorer,
-    OutputGraphImage,
-    FullReduceZX,
-)
-import logging
+import argparse
 import pickle
-import numpy as np
-import torch
-from models import BundleNet
-from bqskit.ir.lang.qasm2 import OPENQASM2Language
-import os
-from bqskit.ext import bqskit_to_qiskit
-from bqskit.ir.gates import CZGate
-import time
-from qiskit.compiler import transpile
-from zx_env.circuit_utils.circuit_generator import random_circuit
-import pyzx as zx
-import os
-import pickle
-import numpy as np
-import ray
 import random
-import importlib
-
-try:
-    korbinianbench = importlib.import_module("pyzx_korbinian.pyzx-heuristics.korbinianbench")
-    from bqskit_pass import KorbinianMethodZX
-except:
-    pass
 
 import matplotlib.pyplot as plt
-import seaborn as sns
+import numpy as np
 import pandas as pd
-import argparse
-from qiskit_ibm_transpiler.ai.synthesis import (
-    AILinearFunctionSynthesis,
-    AIPermutationSynthesis,
-    AICliffordSynthesis,
-)
-from qiskit_ibm_transpiler.ai.routing import AIRouting
-from qiskit_ibm_transpiler.ai.synthesis import AILinearFunctionSynthesis
-from qiskit_ibm_transpiler.ai.collection import CollectLinearFunctions
+import pyzx as zx
+import seaborn as sns
+import torch
+from bqskit.ext import bqskit_to_qiskit, qiskit_to_bqskit
+from bqskit.ir.lang.qasm2 import OPENQASM2Language
+from qiskit.compiler import transpile
 from qiskit.transpiler import PassManager
+from qiskit_ibm_transpiler.ai.collection import CollectLinearFunctions
+from qiskit_ibm_transpiler.ai.synthesis import AILinearFunctionSynthesis
 
-
-def CZ_to_CX(circ):
-    graph = zx.Circuit(circ.qubits)
-
-    for g in circ.gates:
-        if isinstance(g, zx.gates.CZ) and g.name == "CZ":
-            tar = g.target
-            con = g.control
-            graph.add_gate("HAD", con)
-            graph.add_gate("CNOT", tar, con)
-            graph.add_gate("HAD", con)
-        else:
-            graph.add_gate(g)
-    return graph
-
-
-def our_opt(circuit, args):
-    bqCirc = OPENQASM2Language().decode(circuit.to_qasm())
-    basic_gate_deletion_workflow = Workflow(
-        [
-            QuickPartitioner(5),
-            ForEachBlockPass(
-                ScanningGateRemovalPass()
-            ),  # Apply gate deletion to each block (in parallel)
-            ForEachBlockPass(ConvertZX(args.searchdepth)),
-            # ForEachBlockPass(FullReduceZX()),
-            ForEachBlockPass(
-                ScanningGateRemovalPass()
-            ),  # Apply gate deletion to each block (in parallel)
-            UnfoldPass(),  # Unfold the blocks back into the original circuit
-        ]
-    )
-    opt_circuit = bqCirc.copy()
-    circs = [bqCirc.copy()]
-    cnotcount = []
-    for _ in range(3):
-        with Compiler() as compiler:
-            opt_circuit = compiler.compile(
-                opt_circuit, workflow=basic_gate_deletion_workflow
-            )
-            qasm = OPENQASM2Language().encode(opt_circuit)
-            opt_circuit = CZ_to_CX(zx.Circuit.from_qasm(qasm))
-            qasm = opt_circuit.to_qasm()
-            opt_circuit = OPENQASM2Language().decode(qasm)
-            circs.append(opt_circuit.copy())
-            cnotcount.append(
-                opt_circuit.count(CNOTGate()) + opt_circuit.count(CZGate())
-            )
-    print("POST OPT", cnotcount)
-    qasm = OPENQASM2Language().encode(opt_circuit)
-    circ = zx.Circuit.from_qasm(qasm)
-    return circ, circ.twoqubitcount()
-
-
-def korbinian_opt(circuit, args):
-    bqCirc = OPENQASM2Language().decode(circuit.to_qasm())
-    basic_gate_deletion_workflow = Workflow(
-        [
-            QuickPartitioner(5),
-            ForEachBlockPass(
-                ScanningGateRemovalPass()
-            ),  # Apply gate deletion to each block (in parallel)
-            ForEachBlockPass(KorbinianMethodZX()),
-            ForEachBlockPass(
-                ScanningGateRemovalPass()
-            ),  # Apply gate deletion to each block (in parallel)
-            UnfoldPass(),  # Unfold the blocks back into the original circuit
-        ]
-    )
-    opt_circuit = bqCirc.copy()
-    circs = [bqCirc.copy()]
-    cnotcount = []
-    for _ in range(3):
-        with Compiler() as compiler:
-            opt_circuit = compiler.compile(
-                opt_circuit, workflow=basic_gate_deletion_workflow
-            )
-            qasm = OPENQASM2Language().encode(opt_circuit)
-            opt_circuit = CZ_to_CX(zx.Circuit.from_qasm(qasm))
-            qasm = opt_circuit.to_qasm()
-            opt_circuit = OPENQASM2Language().decode(qasm)
-            circs.append(opt_circuit.copy())
-            cnotcount.append(
-                opt_circuit.count(CNOTGate()) + opt_circuit.count(CZGate())
-            )
-    print("POST OPT", cnotcount)
-    qasm = OPENQASM2Language().encode(opt_circuit)
-    circ = zx.Circuit.from_qasm(qasm)
-    return circ, circ.twoqubitcount()
-
-
-def full_reduce(circuit, args):
-    bqCirc = OPENQASM2Language().decode(circuit.to_qasm())
-    basic_gate_deletion_workflow = Workflow(
-        [
-            QuickPartitioner(5),
-            ForEachBlockPass(
-                ScanningGateRemovalPass()
-            ),  # Apply gate deletion to each block (in parallel)
-            # ForEachBlockPass(ConvertZX()),
-            ForEachBlockPass(FullReduceZX()),
-            ForEachBlockPass(
-                ScanningGateRemovalPass()
-            ),  # Apply gate deletion to each block (in parallel)
-            UnfoldPass(),  # Unfold the blocks back into the original circuit
-        ]
-    )
-    opt_circuit = bqCirc.copy()
-    circs = [bqCirc.copy()]
-    cnotcount = []
-    for _ in range(3):
-        with Compiler() as compiler:
-            opt_circuit = compiler.compile(
-                opt_circuit, workflow=basic_gate_deletion_workflow
-            )
-            qasm = OPENQASM2Language().encode(opt_circuit)
-            opt_circuit = CZ_to_CX(zx.Circuit.from_qasm(qasm))
-            qasm = opt_circuit.to_qasm()
-            opt_circuit = OPENQASM2Language().decode(qasm)
-            circs.append(opt_circuit.copy())
-            cnotcount.append(
-                opt_circuit.count(CNOTGate()) + opt_circuit.count(CZGate())
-            )
-    print("POST OPT", cnotcount)
-    # opt_circuit.save("compiled.qasm")
-    # zx.draw(zx.Circuit.from_qasm_file("compiled.qasm"))
-    qasm = OPENQASM2Language().encode(opt_circuit)
-    circ = zx.Circuit.from_qasm(qasm)
-    return circ, circ.twoqubitcount()
-
-
-def just_transpile(circuit, args):
-    bqCirc = OPENQASM2Language().decode(circuit.to_qasm())
-    just_transpile = transpile(
-        bqskit_to_qiskit(bqCirc),
-        optimization_level=3,
-        basis_gates=["h", "cx", "rx", "rz"],
-    )
-    just_transpile = qiskit_to_bqskit(just_transpile)
-    qasm = OPENQASM2Language().encode(just_transpile)
-    circ = zx.Circuit.from_qasm(qasm)
-    return circ, circ.twoqubitcount()
-
-
-def ours_transpile(circuit, args):
-    circuit, _ = our_opt(circuit, args)
-    return just_transpile(circuit, args)
+from zx_compiler import full_reduce_opt, just_transpile, korbinian_opt, our_opt
+from zx_env.circuit_utils.circuit_generator import random_circuit
 
 
 def qiskit_compile(circuit, args):
@@ -291,11 +100,11 @@ def bench(seed, args, n_qubits=50, n_depth=2000):
     )
     # run through all compiler passes
     comps = {
-        #"qiskit_ai_compile": qiskit_compile,
-        #"korbinian": korbinian_opt,
-        "ours": our_opt,
-        #"full reduce": full_reduce,
-        #"transpile": just_transpile,
+        # "qiskit_ai_compile": qiskit_compile,
+        # "korbinian": lambda c, args: korbinian_opt(c),
+        "ours": lambda c, args: our_opt(c, searchdepth=args.searchdepth),
+        # "full reduce": lambda c, args: full_reduce_opt(c),
+        # "transpile": lambda c, args: just_transpile(c),
     }
 
     results_random = dict()

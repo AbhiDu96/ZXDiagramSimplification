@@ -8,7 +8,7 @@ import hydra
 import matplotlib.pyplot as plt
 import pyzx as zx
 from copy import deepcopy
-from TreePolicy import Tree, start_tree, extract_optimal_path
+from TreePolicy import Effect, Tree, start_tree, extract_optimal_path
 from ppo import make_env
 from models import BundleNet
 from zx_env import extract_circuit
@@ -35,7 +35,7 @@ class GreedyTree(Tree):
         action, logit_act, entropy_act, value_act = self.select_expansion(
             bundlenet.nodenet, selected[0], selected[1], device=device, cache=cache
         )
-        effect = [torch.tensor(sel_act, device=device), action]
+        effect = Effect(node_idx=int(sel_act), actions=[action])
         return effect, logit_tree, entropy_tree, value_act + value_tree
 
 

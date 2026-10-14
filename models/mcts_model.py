@@ -2,8 +2,8 @@ import torch
 from torch import nn
 from torch_geometric.data import Batch
 from .graph_cross_attention import GraphCrossAttention
-from torch_geometric import nn as gnn
 from .slow_norm import graphnorm
+from torch_geometric import nn as gnn
 
 
 class MCTS_like_model(nn.Module):
