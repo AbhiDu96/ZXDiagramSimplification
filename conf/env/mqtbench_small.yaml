@@ -1,0 +1,32 @@
+# Small structured circuits from MQTBench (<=5 qubits, <=100 gates)
+# the number of parallel game environments
+num_envs: 4
+# mutation probability
+mutate_prob: 0.0
+# mutation steps
+mutation_steps: 25
+# reward function to use
+reward_fn: "normalized_cnot_count_reward"
+# only give rewards in the final timestep
+sparsify_reward: False
+# use a directed graph as a basis
+make_directed: True
+# circuit source: "random" (default) | "mqtbench"
+circuit_source: "mqtbench"
+# optional cache dir for generated MQTBench circuits (null = ~/.cache/zx_env/mqtbench)
+mqtbench_cache_dir: null
+# qubit count to sample from the MQTBench pool; null = whole 2-5q pool (n_qubits below is then only for feature normalisation)
+mqtbench_qubit_target: null
+# n_qubits (feature normalisation only for mqtbench)
+n_qubits: 5
+depth: 50
+# unused for mqtbench, kept for config compatibility
+cnot_fraction: 0.6
+t_fraction: 0.2
+h_fraction: 0.2
+max_env_steps: 1_000_000
+extra_noise_mean: 0.0
+extra_noise_std: 0.0
+rules_used: ["bialgebra","spider_fusion", "euler", "pi_copy"]
+full_fuse_every_step: False
+reduce_at_reset: False

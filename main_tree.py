@@ -78,7 +78,7 @@ def deploy_train(cfg, agent):
 def deploy_agents(cfg, state, agent):
     env = make_env(cfg, "cpu")
     next_obs, info = env.reset(initial_circuit_graph=state)
-    next_obs = start_tree(cfg,next_obs.Graph, next_obs.state_zx_graph, info=info)
+    next_obs = start_tree(next_obs.Graph, next_obs.state_zx_graph, info=info, multi_range=cfg.multi_range)
     rewards = 0
     for step in range(0, cfg.algorithm.num_steps):
         # ALGO LOGIC: action logic
@@ -176,7 +176,7 @@ def main(cfg: DictConfig):
     for _ in range(cfg.n_validation):
         e = make_env(cfg, device)
         e.reset()
-        validation_circuits.append(e.state_zx_graph_initial)
+        validation_circuits.append(e.unwrapped.state_zx_graph_initial)
     # validation_circuits = [e.state_zx_graph for e in validation_envs]
 
     agent = BundleNet(

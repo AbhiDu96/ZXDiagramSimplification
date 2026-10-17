@@ -101,7 +101,10 @@ def make_env(cfg, device):
         negative_reward_std=cfg.env.extra_noise_std,
         rules_list=cfg.env.rules_used,
         full_fuse_every_step=cfg.env.full_fuse_every_step,
-        reduce_at_reset=cfg.env.reduce_at_reset
+        reduce_at_reset=cfg.env.reduce_at_reset,
+        circuit_source=cfg.env.get("circuit_source", "random"),
+        mqtbench_cache_dir=cfg.env.get("mqtbench_cache_dir", None),
+        mqtbench_qubit_target=cfg.env.get("mqtbench_qubit_target", None),
     )
     if cfg.env.sparsify_reward:
         env = utils.RewardTransform(env)
