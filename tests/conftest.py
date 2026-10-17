@@ -21,9 +21,12 @@ def make_cfg():
 
     def _make(overrides=None, env="more_complex_more_rules_ranges", model="GATActionModel"):
         base = [
-            "+algorithm=PPO",
-            f"+model={model}",
-            f"+env={env}",
+            # config.yaml already declares these groups in its defaults list, so
+            # override them (no leading "+", which would *append* a second value
+            # and raise "Multiple values for <group>").
+            "algorithm=PPO",
+            f"model={model}",
+            f"env={env}",
             "exp_name=pytest",
             "device=cpu",
         ]

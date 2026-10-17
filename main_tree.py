@@ -110,7 +110,11 @@ def validation(run_name, global_step, cfg, writer, validations, agent):
         for circuit in next_obs
     ]
     writer.add_scalar(
-        "charts/validation_return", torch.tensor(rewards).mean().item(), global_step
+        # cast to float: integer reward functions (e.g. absolute_cnot_count_reward)
+        # produce Long rewards, and torch.mean() refuses non-floating dtypes.
+        "charts/validation_return",
+        torch.tensor(rewards, dtype=torch.float32).mean().item(),
+        global_step,
     )
     writer.add_scalar("charts/validation_mean_CNOT", np.mean(tq), global_step)
     writer.add_scalar("charts/validation_max_CNOT", np.max(tq), global_step)

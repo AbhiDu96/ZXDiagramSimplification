@@ -10,7 +10,7 @@ from .action_model import ActionModel
 from .mcts_model import MCTS_like_model
 from .action_net import ActionNet
 from .action_embedding_model import ActionEmbeddingModel
-from .bundle_net import BundleNet
+from .bundle_net import BundleNet, DummyActionModel, TreeNet
 from .categorical_masked import CategoricalMasked
 
 __all__ = [
@@ -22,6 +22,8 @@ __all__ = [
     "ActionNet",
     "ActionEmbeddingModel",
     "BundleNet",
+    "DummyActionModel",
+    "TreeNet",
     "CategoricalMasked",
     "load_agent_checkpoint",
 ]
